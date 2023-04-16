@@ -2,39 +2,58 @@ package poo.pl2.models;
 
 public class Usuario {
     
+    // Atributos
+    private String nombre;
+    private int edad;
+    private String email;
+    private String contraseña;
+    
+    // Constructor
+    public Usuario(String nombre, int edad, String email, String contraseña) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.email = email;
+        this.contraseña = contraseña;
+    }
+    
+    // Métodos de acceso (getters y setters)
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public int getEdad() {
+        return edad;
+    }
+    
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getContraseña() {
+        return contraseña;
+    }
+    
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
+    // Método para mostrar información del usuario
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad);
+        System.out.println("Email: " + email);
+    }
 }
 
-
-/*
-Administrador de la aplicación: Es el responsable de la aplicación y, utilizará los
-siguientes datos para acceder: correo “admin@javaeat.com” y clave “admin”.
-Podrá gestionar tanto a los usuarios como a los restaurantes.
-2. Clientes: Para poder acceder a la aplicación, los clientes deberán estar registrados
-como usuarios. En el momento de acceder, la aplicación les permitirá registrarse
-o entrar. En caso de que sean usuarios registrados entrarán con su correo y su
-clave.
-Tendremos dos tipos de clientes, por un lado, el cliente particular y por otro
-empresas.
-Los datos que tendremos que guardar de los clientes particulares son los
-siguientes:
-a. DNI.
-b. Nombre.
-c. Correo electrónico.
-d. Clave.
-e. Dirección (calle, número, código postal y ciudad).
-f. Tarjeta de crédito (nombre del titular, número de 16 dígitos y fecha de
-caducidad).
-g. Teléfono.
-1Ejercicio Final de Laboratorio
-Curso 2022-23
-Las empresas tendrán los siguientes datos:
-a. CIF.
-b. Nombre.
-c. Correo electrónico.
-d. Clave.
-e. Dirección (calle, número, código postal y ciudad).
-f. Tarjeta de crédito (nombre del titular, número de 16 dígitos y fecha de
-caducidad).
-g. Teléfono.
-h. Web.
-*/
