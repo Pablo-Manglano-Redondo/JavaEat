@@ -1,4 +1,6 @@
 package poo.pl2.models;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Restaurante {
 
@@ -103,7 +105,7 @@ public class Restaurante {
     public double calcularPrecioCatering(List<Comida> comidas, List<Servicio> servicios, boolean espacioPrivado) {
         double totalComidas = 0;
         for (Comida comida : comidas) {
-            totalComidas += comida.getPrecioVenta();
+            totalComidas += comida.getPrecio();
         }
 
         double totalServicios = 0;
