@@ -96,8 +96,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_contraseñaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("I'm working!!");
+
+        String user = usuario.getText();
+        String password = contraseña.getText();
+        System.out.println(user);
+        System.out.println(password);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
