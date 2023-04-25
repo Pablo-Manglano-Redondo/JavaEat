@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package poo.pl2;
+import poo.pl2.views.Login;
 
-/**
- *
- * @author pxblx
- */
 public class PL2 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        Login f = new Login();
+        f.setVisible (true);
     }
 }
-
-
-/*AQUI ES DONDE SE HACE EL MAIN, EN ESTE PÀCKAGE NO SE HACE NADA MAS. */

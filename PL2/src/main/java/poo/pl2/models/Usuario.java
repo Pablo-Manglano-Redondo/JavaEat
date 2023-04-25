@@ -3,7 +3,7 @@ package poo.pl2.models;
 public class Usuario {
     
     // Atributos
-    private String nombre;
+    public String nombre;
     private int edad;
     private String email;
     private String contraseña;

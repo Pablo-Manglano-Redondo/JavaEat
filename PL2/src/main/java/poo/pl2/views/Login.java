@@ -3,7 +3,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Login extends javax.swing.JFrame {
-    
+     public String user;
     
     public Login() {
         initComponents();
@@ -147,4 +147,3 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
-

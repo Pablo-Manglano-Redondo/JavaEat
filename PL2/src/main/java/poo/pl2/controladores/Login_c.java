@@ -4,13 +4,12 @@ import poo.pl2.models.Usuario;
 
 public class Login_c {
     
-    public String checkUser() {
+    public void checkUser() {
         
-        if (Login.user == Usuario.nombre) {
-            System.out.println("Nombre usuario no registrado en JavaEat");
+    /*    if (Login.user.equals(Usuario.nombre)) {
+            System.out.println("Nombre usuario registrado en JavaEat");
     }
-        
+    */
     
-    
-    
+    }
 }
