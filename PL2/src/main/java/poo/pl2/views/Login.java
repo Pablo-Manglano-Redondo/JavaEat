@@ -97,6 +97,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        Menu menu = new Menu(this, true);
         String user = usuario.getText();
         String password = contraseña.getText();
         System.out.println(user);

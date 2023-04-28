@@ -8,12 +8,11 @@ package poo.pl2.views;
  *
  * @author pablo
  */
-public class Menu extends javax.swing.JFrame {
+public class Menu extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Menu
-     */
-    public Menu() {
+    
+    public Menu(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -233,12 +232,7 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
