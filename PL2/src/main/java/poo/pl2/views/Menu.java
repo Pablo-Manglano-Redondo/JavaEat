@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package poo.pl2.views;
 
-/**
- *
- * @author pablo
- */
 public class Menu extends javax.swing.JDialog {
 
     
     public Menu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setVisible(true); //go to CheckIn frame
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,7 +224,11 @@ public class Menu extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Menu(new java.awt.Frame(),true).setVisible(true);               
+            }
+        });
         
     }
 

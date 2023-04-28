@@ -6,6 +6,7 @@ public class Login extends javax.swing.JFrame {
      public String user;
     
     public Login() {
+        
         initComponents();
         TextPrompt usuarioo = new TextPrompt("Usuario", usuario);
         TextPrompt contraseñaa = new TextPrompt("Contraseña", contraseña);
@@ -97,11 +98,12 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Menu menu = new Menu(this, true);
-        String user = usuario.getText();
+        NewJDialog menu = new NewJDialog(this, true);
+        
+        /*String user = usuario.getText();
         String password = contraseña.getText();
         System.out.println(user);
-        System.out.println(password);
+        System.out.println(password);*/
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -148,3 +150,4 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
+
