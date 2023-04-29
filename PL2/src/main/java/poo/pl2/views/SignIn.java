@@ -18,6 +18,8 @@ public class SignIn extends javax.swing.JDialog {
         TextPrompt Webb = new TextPrompt("Web", Web);
         
         scaleImage();
+        
+        this.setVisible(true);
     }
 
     public void scaleImage(){
