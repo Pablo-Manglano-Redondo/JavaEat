@@ -1,11 +1,12 @@
 package poo.pl2.views;
+
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-public class Register extends javax.swing.JFrame {
+public class SignIn extends javax.swing.JDialog {
 
-    
-    public Register() {
+    public SignIn(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         TextPrompt Correoo = new TextPrompt("Correo", Correo);
         TextPrompt Passwordd = new TextPrompt("Contraseña", Password);
@@ -16,10 +17,9 @@ public class Register extends javax.swing.JFrame {
         TextPrompt Tarjetaa = new TextPrompt("Tarjeta", Tarjeta);
         TextPrompt Webb = new TextPrompt("Web", Web);
         
-        scaleImage(); //método para insertar una imagen en una etiqueta y reajustar el tamaño de la imagen a la etiqueta
+        scaleImage();
     }
-    
-    
+
     public void scaleImage(){
         ImageIcon logo = new ImageIcon("def.jpg");
         Image img = logo.getImage();
@@ -29,7 +29,7 @@ public class Register extends javax.swing.JFrame {
         Imagen.setText("");
         Imagen.setIcon(scaledIcon);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +50,7 @@ public class Register extends javax.swing.JFrame {
         Tarjeta = new javax.swing.JTextField();
         Web = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +101,7 @@ public class Register extends javax.swing.JFrame {
                             .addComponent(DNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(89, 89, 89)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Web, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(Web, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                             .addComponent(Tarjeta)
                             .addComponent(Direccion)
                             .addComponent(Nombre)))
@@ -129,7 +129,7 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Web, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Submit)
@@ -144,13 +144,13 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CorreoActionPerformed
 
-    private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DNIActionPerformed
-
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitMouseClicked
+
+    private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DNIActionPerformed
 
     private void DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DireccionActionPerformed
         // TODO add your handling code here:
@@ -177,20 +177,27 @@ public class Register extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Register().setVisible(true);
+                SignIn dialog = new SignIn(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -207,8 +214,4 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField Telefono;
     private javax.swing.JTextField Web;
     // End of variables declaration//GEN-END:variables
-
-    
-
-    
 }
