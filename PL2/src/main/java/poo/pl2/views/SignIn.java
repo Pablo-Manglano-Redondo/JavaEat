@@ -2,6 +2,7 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import poo.pl2.models.Usuario;
 
 public class SignIn extends javax.swing.JDialog {
 
@@ -23,7 +24,7 @@ public class SignIn extends javax.swing.JDialog {
     }
 
     public void scaleImage(){
-        ImageIcon logo = new ImageIcon("def.jpg");
+        ImageIcon logo = new ImageIcon("def.png");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -147,7 +148,7 @@ public class SignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_CorreoActionPerformed
 
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
-        // TODO add your handling code here:
+        Usuario.guardarDatos();
     }//GEN-LAST:event_SubmitMouseClicked
 
     private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed

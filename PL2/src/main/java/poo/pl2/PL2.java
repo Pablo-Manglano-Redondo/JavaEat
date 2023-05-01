@@ -7,5 +7,7 @@ public class PL2 {
         
         Login f = new Login();
         f.setVisible (true);
+        
+        
     }
 }

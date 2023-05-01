@@ -14,12 +14,21 @@ public class Usuario {
     private int edad;
     private String email;
     private String contraseña;
-    private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    
+    public static ArrayList<Usuario> getUsuarios() {
+        return usuarios;
+    }
     
     // Constructor
     public Usuario(String nombre, int edad, String email, String contraseña) {
         this.nombre = nombre;
         this.edad = edad;
+        this.email = email;
+        this.contraseña = contraseña;
+    }
+    
+    public Usuario(String email, String contraseña) {
         this.email = email;
         this.contraseña = contraseña;
     }
@@ -64,6 +73,21 @@ public class Usuario {
         System.out.println("Email: " + email);
     }
     
+    public static String intoducirUsuario(Usuario v) {
+        try {
+            if (usuarios.contains(v)) {//si esta dentro
+                throw new UsuarioException(UsuarioException.USUARIO_YA_REGISTRADO);
+            } 
+            else {  
+                usuarios.add(v);
+                return "Usuario " + v.getNombre() + " registrado";
+            }
+        } catch (UsuarioException ae) {
+            return ae.toString();
+        }
+
+    }
+    
     public static void cargarDatos() {
         try {
             //Lectura de los objetos
@@ -102,5 +126,7 @@ public class Usuario {
             System.out.println("Error: " + e.getMessage());
         }
     }//fin guardarDatos
+    
+    
 }
 
