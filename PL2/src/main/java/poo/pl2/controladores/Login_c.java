@@ -13,8 +13,8 @@ public class Login_c {
     String email = Login.usuario.getText();
     String contraseña = Login.contraseña.getText();
     Usuario us = new Usuario(email, contraseña);
-    Usuario.introducirUsuario(us);
-    Usuario.cargarDatos();
+    Usuario.intoducirUsuario(us);
+    Usuario.guardarDatos();
 
     //if (user == admin && password = admin) {
         // Dar permisos a todo
