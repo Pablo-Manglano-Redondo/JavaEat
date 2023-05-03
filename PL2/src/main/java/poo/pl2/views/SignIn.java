@@ -2,7 +2,9 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import poo.pl2.controladores.SignIn_c;
 import poo.pl2.models.Usuario;
+
 
 public class SignIn extends javax.swing.JDialog {
 
@@ -148,7 +150,7 @@ public class SignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_CorreoActionPerformed
 
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
-        Usuario.guardarDatos();
+        SignIn_c.registerUser();
     }//GEN-LAST:event_SubmitMouseClicked
 
     private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
@@ -206,15 +208,15 @@ public class SignIn extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Correo;
-    private javax.swing.JTextField DNI;
-    private javax.swing.JTextField Direccion;
+    public static javax.swing.JTextField Correo;
+    public static javax.swing.JTextField DNI;
+    public static javax.swing.JTextField Direccion;
     private javax.swing.JLabel Imagen;
-    private javax.swing.JTextField Nombre;
-    private javax.swing.JPasswordField Password;
+    public static javax.swing.JTextField Nombre;
+    public static javax.swing.JPasswordField Password;
     private javax.swing.JButton Submit;
-    private javax.swing.JTextField Tarjeta;
-    private javax.swing.JTextField Telefono;
-    private javax.swing.JTextField Web;
+    public static javax.swing.JTextField Tarjeta;
+    public static javax.swing.JTextField Telefono;
+    public static javax.swing.JTextField Web;
     // End of variables declaration//GEN-END:variables
 }

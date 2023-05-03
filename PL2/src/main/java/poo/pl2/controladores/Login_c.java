@@ -10,11 +10,9 @@ public class Login_c {
             System.out.println("Nombre usuario registrado en JavaEat");
     }
     */
-    String email = Login.usuario.getText();
-    String contraseña = Login.contraseña.getText();
-    Usuario us = new Usuario(email, contraseña);
-    Usuario.intoducirUsuario(us);
-    Usuario.guardarDatos();
+    Usuario.cargarDatos();
+    
+    
 
     //if (user == admin && password = admin) {
         // Dar permisos a todo

@@ -5,9 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario implements Serializable{
     
     // Atributos
     public String nombre;
@@ -73,7 +74,7 @@ public class Usuario {
         System.out.println("Email: " + email);
     }
     
-    public static String intoducirUsuario(Usuario v) {
+    public static String introducirUsuario(Usuario v) {
         try {
             if (usuarios.contains(v)) {//si esta dentro
                 throw new UsuarioException(UsuarioException.USUARIO_YA_REGISTRADO);
