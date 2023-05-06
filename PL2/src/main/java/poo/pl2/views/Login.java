@@ -127,15 +127,14 @@ public class Login extends javax.swing.JFrame {
         if (Login_c.checkUser() == true) {
             Menu menu = new Menu(this, true);
         }
+        else if (Login_c.checkAdmin() == true) {
+            Menu menu = new Menu(this, true);
+        }
         else {
             JOptionPane.showMessageDialog(this, "Usuario y contraseña no coinciden o no estás registrado en JavaEat");
 
         }
         
-        /*String user = usuario.getText();
-        String password = contraseña.getText();
-        System.out.println(user);
-        System.out.println(password);*/
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

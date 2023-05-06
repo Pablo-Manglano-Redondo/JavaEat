@@ -5,7 +5,7 @@ import poo.pl2.views.Menu;
 
 public class Login_c {
     
-    public static boolean checkUser() {
+    public static boolean checkAdmin() {
      
     String email = Login.usuario.getText();
     String contraseña = Login.contraseña.getText();   
@@ -15,14 +15,16 @@ public class Login_c {
         // DAR PERMISOS
         return true;
     }
-    else {
-        if (email.equals("PON ALGO AQUI MELON") && contraseña.equals("AQUI TAMBIEN EH")) {
-            // Mensaje de te has autorizado con éxito
-            return true;
-        }
-        else {
-            return false;
-        }
+    return false;
     }
+    
+    public static boolean checkUser() {
+    String email = Login.usuario.getText();
+    String contraseña = Login.contraseña.getText(); 
+        
+    if (Usuario.validarCredenciales(email, contraseña)) {
+        return true;
+    } 
+    return false;
     }
 }

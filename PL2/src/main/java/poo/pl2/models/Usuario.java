@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Usuario implements Serializable{
     
@@ -15,9 +15,9 @@ public class Usuario implements Serializable{
     private int edad;
     private String email;
     private String contraseña;
-    public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    public static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
     
-    public static ArrayList<Usuario> getUsuarios() {
+    public static HashMap<String, Usuario> getUsuarios() {
         return usuarios;
     }
     
@@ -75,26 +75,49 @@ public class Usuario implements Serializable{
     }
     
     public static String introducirUsuario(Usuario v) {
-        try {
-            if (usuarios.contains(v)) {//si esta dentro
-                throw new UsuarioException(UsuarioException.USUARIO_YA_REGISTRADO);
-            } 
-            else {  
-                usuarios.add(v);
-                return "Usuario " + v.getNombre() + " registrado";
-            }
-        } catch (UsuarioException ae) {
-            return ae.toString();
+    try {
+        if (usuarios.containsKey(v.getEmail())) {//si esta dentro
+            throw new UsuarioException(UsuarioException.USUARIO_YA_REGISTRADO);
+        } 
+        else {  
+            usuarios.put(v.getEmail(), v);
+            return "Usuario " + v.getNombre() + " registrado";
         }
+    } catch (UsuarioException ae) {
+        return ae.toString();
+    }
 
     }
+    
+    public static boolean validarCredenciales(String email, String contraseña) {
+    // Verificar si el correo electrónico está en el HashMap
+    if (usuarios.containsKey(email)) {
+        // Obtener el objeto Usuario correspondiente
+        Usuario usuario = usuarios.get(email);
+        // Comparar las contraseñas
+        if (usuario.getContraseña().equals(contraseña)) {
+            // Las contraseñas coinciden, login exitoso
+            return true;
+        } else {
+            // La contraseña es incorrecta
+            System.out.println("Contraseña incorrecta");
+            
+            return false;
+        }
+    } else {
+        // El usuario no existe
+        System.out.println("Usuario inexistente");
+        return false;
+    }
+}
+
     
     public static void cargarDatos() {
         try {
             //Lectura de los objetos
             FileInputStream istreamPer = new FileInputStream("copiasegUsers.dat");
             ObjectInputStream oisPer = new ObjectInputStream(istreamPer);
-            usuarios = (ArrayList<Usuario>) oisPer.readObject();
+            usuarios = (HashMap<String, Usuario>) oisPer.readObject();
             istreamPer.close();
         } catch (IOException ioe) {
             System.out.println("Error de IO: " + ioe.getMessage());
