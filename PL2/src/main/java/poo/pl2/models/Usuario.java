@@ -67,12 +67,7 @@ public class Usuario implements Serializable{
         this.contraseña = contraseña;
     }
     
-    // Método para mostrar información del usuario
-    public void mostrarInformacion() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Edad: " + edad);
-        System.out.println("Email: " + email);
-    }
+    
     
     public static String introducirUsuario(Usuario v) {
     try {
@@ -132,9 +127,7 @@ public class Usuario implements Serializable{
         try {
             //Si hay datos los guardamos...
             if (!usuarios.isEmpty()) {
-                /**
-                 * **** Serialización de los objetos *****
-                 */
+
                 //Serialización
                 FileOutputStream ostreamPer = new FileOutputStream("copiasegUsers.dat");
                 ObjectOutputStream oosPer = new ObjectOutputStream(ostreamPer);
