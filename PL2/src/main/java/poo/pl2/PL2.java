@@ -9,7 +9,7 @@ public class PL2 {
         Usuario.cargarDatos();
         Login f = new Login();
         f.setVisible (true);
-        
+        Usuario.guardarDatos();
         
     }
 }

@@ -102,6 +102,7 @@ public class Usuario implements Serializable{
     } else {
         // El usuario no existe
         System.out.println("Usuario inexistente");
+        
         return false;
     }
 }

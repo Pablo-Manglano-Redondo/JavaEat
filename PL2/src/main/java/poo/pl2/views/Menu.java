@@ -1,17 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-public class Menu extends javax.swing.JDialog {
+/**
+ *
+ * @author pablo
+ */
+public class Menu extends javax.swing.JFrame {
 
-    public Menu(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    /**
+     * Creates new form Menu
+     */
+    public Menu() {
         initComponents();
         scaleImage();
         this.setVisible(true);
-    }
         
+    }
+
     public void scaleImage(){
         ImageIcon logo = new ImageIcon("def.png");
         Image img = logo.getImage();
@@ -22,6 +33,7 @@ public class Menu extends javax.swing.JDialog {
         Imagen.setIcon(scaledIcon);
 
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,42 +48,42 @@ public class Menu extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Imagen.setText("jLabel1");
 
-        jLabel1.setText("Imagen restaurante");
+        jLabel1.setText("Ordenar por relevancia (mejor calificacion)");
 
-        jLabel2.setText("Tipos comida ofrecida");
+        jLabel2.setText("Ordenar por tiempo medio de envio");
 
-        jLabel3.setText("Descripción restaurante");
+        jLabel3.setText("Servicio de catering disponible");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 832, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addGap(73, 73, 73)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel2)
-                .addGap(33, 33, 33)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel3)
-                .addContainerGap(352, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
-                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -104,17 +116,10 @@ public class Menu extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Menu dialog = new Menu(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }
