@@ -9,6 +9,7 @@ public class Comida {
     
     public Comida(String nombre, String id, double precio, String descripcion) {
         this.nombre = nombre;
+        this.id = id;
         this.precio = precio;
         this.descripcion = descripcion;
     }
@@ -19,6 +20,14 @@ public class Comida {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
     }
     
     public double getPrecio() {
