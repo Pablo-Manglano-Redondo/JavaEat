@@ -8,7 +8,7 @@ public class Login_c {
     public static boolean checkAdmin() {
      
     String email = Login.usuario.getText();
-    String contraseña = Login.contraseña.getText();   
+    String contraseña = new String(Login.contraseña.getPassword());
     
         
     if (email.equals("admin@javaeat.com") && contraseña.equals("admin")) {
@@ -20,7 +20,7 @@ public class Login_c {
     
     public static boolean checkUser() {
     String email = Login.usuario.getText();
-    String contraseña = Login.contraseña.getText(); 
+    String contraseña = new String(Login.contraseña.getPassword()); 
         
     if (Usuario.validarCredenciales(email, contraseña)) {
         return true;

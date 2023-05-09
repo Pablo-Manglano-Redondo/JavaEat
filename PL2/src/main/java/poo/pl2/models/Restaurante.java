@@ -1,16 +1,10 @@
 package poo.pl2.models;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.ArrayList;
-import static poo.pl2.models.Usuario.usuarios;
 
 public class Restaurante {
 
-    private String cif;
+    private String cif; //como el id
     private String nombre;
     private Direccion direccion;
     private String especialidad;
@@ -19,6 +13,7 @@ public class Restaurante {
     private int tiempoMedioEnvio;
     private boolean cateringParaEmpresas;
     private List<Comida> comidas;
+    public static List<Restaurante> restaurantes = new ArrayList<>();
 
     public Restaurante(String cif, String nombre, Direccion direccion, String especialidad, double gastosEnvio, int tiempoMedioEnvio, boolean cateringParaEmpresas) {
         this.cif = cif;

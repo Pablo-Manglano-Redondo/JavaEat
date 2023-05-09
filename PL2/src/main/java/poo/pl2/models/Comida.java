@@ -2,11 +2,12 @@ package poo.pl2.models;
 
 public class Comida {
     
+    private String id;
     private String nombre;
     private double precio;
     private String descripcion;
     
-    public Comida(String nombre, double precio, String descripcion) {
+    public Comida(String nombre, String id, double precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
