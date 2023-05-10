@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Restaurante {
 
+    private String descripcion;
     private String cif; //como el id
     private String nombre;
     private Direccion direccion;
@@ -15,7 +16,8 @@ public class Restaurante {
     private List<Comida> comidas;
     public static List<Restaurante> restaurantes = new ArrayList<>();
 
-    public Restaurante(String cif, String nombre, Direccion direccion, String especialidad, double gastosEnvio, int tiempoMedioEnvio, boolean cateringParaEmpresas) {
+    public Restaurante(String descripcion, String cif, String nombre, Direccion direccion, String especialidad, double gastosEnvio, int tiempoMedioEnvio, boolean cateringParaEmpresas) {
+        this.descripcion = descripcion;
         this.cif = cif;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -27,6 +29,14 @@ public class Restaurante {
         this.comidas = new ArrayList<Comida>();
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     public String getCif() {
         return cif;
     }

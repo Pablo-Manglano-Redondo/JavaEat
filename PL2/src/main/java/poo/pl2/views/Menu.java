@@ -6,7 +6,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import poo.pl2.models.Restaurante;
-import poo.pl2.views.Local;
 
 /**
  *
@@ -23,7 +22,7 @@ public class Menu extends javax.swing.JFrame {
         
     }
 
-    public void scaleImage(){
+    private void scaleImage(){
         ImageIcon logo = new ImageIcon("def.png");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_SMOOTH);
@@ -35,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
     }
     
     
-    public void populateComboBox(JComboBox jcb, List<Restaurante> restaurantes) {
+    private void populateComboBox(JComboBox jcb, List<Restaurante> restaurantes) {
     
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
@@ -49,7 +48,7 @@ public class Menu extends javax.swing.JFrame {
     
     }
     
-    public boolean FixComboBox(JComboBox jcb) {
+    public boolean fixComboBox(JComboBox jcb) {
         int index = jcb.getSelectedIndex();
         if (index != 0) {
             return true;
@@ -57,6 +56,27 @@ public class Menu extends javax.swing.JFrame {
         return false;
         }
     
+    public String obtenerDescripcion(Restaurante restaurante) {
+        
+        String returnVal = "Not found";
+        if (jComboBox1.getSelectedItem().equals(restaurante.getNombre())) {
+            returnVal = restaurante.getDescripcion();
+        }
+        return returnVal;
+    }
+    
+    public Restaurante getRestauranteFromItem() {
+    
+        List<Restaurante> restaurantes = Restaurante.restaurantes;
+        // Desde un array con todos los restaurantes...
+        // TODO: Revisar Java Streams!!!
+        return restaurantes.stream().filter((elem) -> {
+        
+            return elem.getNombre().equals(jComboBox1.getSelectedItem());
+            
+        }).findAny().get();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,8 +151,11 @@ public class Menu extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
-       if (FixComboBox(jComboBox1) == true) {
-       Local local = new Local(this, true);
+       if (fixComboBox(jComboBox1)) {
+        System.out.println(jComboBox1.getSelectedItem().toString());
+        Local local = new Local(this, true, jComboBox1.getSelectedItem().toString(),
+                getRestauranteFromItem().getDescripcion());
+        
        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -178,7 +201,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
-    private javax.swing.JComboBox<String> jComboBox1;
+    public static javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
