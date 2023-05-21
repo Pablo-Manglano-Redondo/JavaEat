@@ -172,6 +172,7 @@ public class SignIn extends javax.swing.JDialog {
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
         // TODO add your handling code here:
+        SignIn_c.registerUser();
         JOptionPane.showMessageDialog(this, "Usuario registrado con éxito");
         this.setVisible(false);
 
