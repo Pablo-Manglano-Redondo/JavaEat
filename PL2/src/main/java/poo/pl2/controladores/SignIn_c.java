@@ -8,7 +8,7 @@ public class SignIn_c {
     public static void registerUser() {
         
     String email = SignIn.Correo.getText();
-    String contraseña = SignIn.Password.getText();
+    String contraseña = new String(SignIn.Password.getPassword());
     
     //Hacer lo mismo con el resto de campos
     

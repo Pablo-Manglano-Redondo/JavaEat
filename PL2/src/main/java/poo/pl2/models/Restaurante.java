@@ -14,7 +14,7 @@ public class Restaurante {
     private int tiempoMedioEnvio;
     private boolean cateringParaEmpresas;
     public static List<Comida> comidas;
-    public static List<Comida> comidasLabel = new ArrayList<>();
+    public static List<Comida> comidasLabel = new ArrayList<>(); //QUITAR ESTO
     public static List<Restaurante> restaurantes = new ArrayList<>();
     
 

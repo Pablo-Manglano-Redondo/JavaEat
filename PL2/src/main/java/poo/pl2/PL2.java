@@ -15,9 +15,6 @@ public class PL2 {
         Direccion direccionRestaurante = new Direccion("Avenida del Sol", 123,
                 "Barcelona", "08001");
         
-        Restaurante Example = new Restaurante("", "Example", 
-                "Seleccione un restaurante", direccionRestaurante, "",
-                0.0, 0, false);
         Restaurante Restaurante1 = new Restaurante("Hola soy el r1", "CIF123", 
                 "Restaurante 1", direccionRestaurante, "Comida Mediterránea", 
                 5.0, 30, true);
@@ -25,7 +22,6 @@ public class PL2 {
                 "Restaurante 2", direccionRestaurante, "Comida Mediterránea",
                 5.0, 30, true);
         
-        Restaurante.restaurantes.add(Example);
         Restaurante.restaurantes.add(Restaurante1);
         Restaurante.restaurantes.add(Restaurante2);
         
