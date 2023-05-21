@@ -1,11 +1,15 @@
 package poo.pl2.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Comida {
     
     private String id;
     private String nombre;
-    private double precio;
+    public static double precio;
     private String descripcion;
+    public static List<Comida> carritos = new ArrayList<>();
     
     public Comida(String nombre, String id, double precio, String descripcion, Restaurante restaurante) {
         this.nombre = nombre;

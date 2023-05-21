@@ -13,8 +13,7 @@ public class Restaurante {
     private double gastosEnvio;
     private int tiempoMedioEnvio;
     private boolean cateringParaEmpresas;
-    public static List<Comida> comidas;
-    public static List<Comida> comidasLabel = new ArrayList<>(); //QUITAR ESTO
+    public static List<Comida> comidas = new ArrayList<>();
     public static List<Restaurante> restaurantes = new ArrayList<>();
     
 
@@ -28,7 +27,6 @@ public class Restaurante {
         this.gastosEnvio = gastosEnvio;
         this.tiempoMedioEnvio = tiempoMedioEnvio;
         this.cateringParaEmpresas = cateringParaEmpresas;
-        this.comidas = new ArrayList<Comida>();
     }
 
     public String getDescripcion() {

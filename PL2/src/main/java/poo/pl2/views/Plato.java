@@ -1,7 +1,13 @@
 package poo.pl2.views;
 
 import java.awt.Image;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
+import poo.pl2.models.Comida;
+import poo.pl2.models.Restaurante;
+import poo.pl2.views.Cesta;
 
 /**
  *
@@ -28,7 +34,7 @@ public class Plato extends javax.swing.JDialog {
     }
     
     private void scaleImageComida() {
-        ImageIcon logo = new ImageIcon(Local.jList2.getSelectedValue() + ".jpg");
+        ImageIcon logo = new ImageIcon(Establecimiento.jList2.getSelectedValue() + ".jpg");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(imagenRestaurante.getWidth(), imagenRestaurante.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -48,6 +54,20 @@ public class Plato extends javax.swing.JDialog {
 
     }
     
+    public Comida getComidaFromItem() {
+    
+        List<Comida> comidas = Restaurante.comidas;
+        // Desde un array con todos los restaurantes...
+        // TODO: Revisar Java Streams!!!
+        return comidas.stream().filter((elem) -> {
+        
+            return elem.getNombre().equals(Establecimiento.jList2.getSelectedValue());
+            
+        }).findAny().get();
+        
+    }
+   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +81,8 @@ public class Plato extends javax.swing.JDialog {
         nombreRestaurante = new javax.swing.JLabel();
         imagenRestaurante = new javax.swing.JLabel();
         descripcionRestaurante = new javax.swing.JLabel();
+        cantidad = new javax.swing.JComboBox<>();
+        pedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,27 +94,50 @@ public class Plato extends javax.swing.JDialog {
 
         descripcionRestaurante.setText("Descripcion e ingredientes");
 
+        cantidad.setEditable(true);
+        cantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+        cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidadActionPerformed(evt);
+            }
+        });
+
+        pedido.setText("Pedir");
+        pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 925, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(140, 140, 140)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(descripcionRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(nombreRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71)
-                        .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 234, Short.MAX_VALUE))
+                        .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pedido)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -101,12 +146,27 @@ public class Plato extends javax.swing.JDialog {
                         .addComponent(descripcionRestaurante)
                         .addGap(34, 34, 34))
                     .addComponent(imagenRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pedido))
+                .addGap(48, 48, 48)
                 .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadActionPerformed
+        // TODO add your handling code here:
+        int cantidaad = cantidad.getSelectedIndex();
+    }//GEN-LAST:event_cantidadActionPerformed
+
+    private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed
+        // TODO add your handling code here:
+        Comida value = getComidaFromItem();
+        Comida.carritos.add(value);
+    }//GEN-LAST:event_pedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +198,7 @@ public class Plato extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Plato dialog = new Plato(parentDialog, true);
+                Plato dialog = new Plato(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -152,8 +212,10 @@ public class Plato extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
+    private javax.swing.JComboBox<Integer> cantidad;
     private javax.swing.JLabel descripcionRestaurante;
     private javax.swing.JLabel imagenRestaurante;
     private javax.swing.JLabel nombreRestaurante;
+    private javax.swing.JButton pedido;
     // End of variables declaration//GEN-END:variables
 }

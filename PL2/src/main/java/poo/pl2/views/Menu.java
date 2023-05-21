@@ -181,7 +181,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        Local local = new Local(this, true, jList1.getSelectedValue(),
+        Establecimiento establecimiento = new Establecimiento(jList1.getSelectedValue(),
                 getRestauranteFromItem().getDescripcion());
     }//GEN-LAST:event_jList1MouseClicked
 

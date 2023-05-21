@@ -34,12 +34,7 @@ public class PL2 {
         Restaurante.comidas.add(comida2);
         Restaurante.comidas.add(comida3);
         Restaurante.comidas.add(comida4);
-        
-        
-        Restaurante.comidasLabel.add(comida1);
-        Restaurante.comidasLabel.add(comida2);
-        Restaurante.comidasLabel.add(comida3);
-        Restaurante.comidasLabel.add(comida4);
+  
                
         Login f = new Login();
         f.setVisible (true);
