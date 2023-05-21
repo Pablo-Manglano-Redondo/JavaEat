@@ -1,4 +1,5 @@
 package poo.pl2.controladores;
+import poo.pl2.models.Serializacion;
 import poo.pl2.models.Usuario;
 import poo.pl2.views.SignIn;
 
@@ -13,6 +14,6 @@ public class SignIn_c {
     
     Usuario us = new Usuario(email, contraseña);
     Usuario.introducirUsuario(us);
-    Usuario.guardarDatos();
+    Serializacion.guardarDatos();
     }
 }

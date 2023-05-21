@@ -2,6 +2,7 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import poo.pl2.controladores.SignIn_c;
 
 
@@ -66,6 +67,11 @@ public class SignIn extends javax.swing.JDialog {
         Submit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SubmitMouseClicked(evt);
+            }
+        });
+        Submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitActionPerformed(evt);
             }
         });
 
@@ -163,6 +169,13 @@ public class SignIn extends javax.swing.JDialog {
     private void WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WebActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_WebActionPerformed
+
+    private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Usuario registrado con éxito");
+        this.setVisible(false);
+
+    }//GEN-LAST:event_SubmitActionPerformed
 
     /**
      * @param args the command line arguments

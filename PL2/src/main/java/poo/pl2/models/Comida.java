@@ -7,7 +7,7 @@ public class Comida {
     private double precio;
     private String descripcion;
     
-    public Comida(String nombre, String id, double precio, String descripcion) {
+    public Comida(String nombre, String id, double precio, String descripcion, Restaurante restaurante) {
         this.nombre = nombre;
         this.id = id;
         this.precio = precio;

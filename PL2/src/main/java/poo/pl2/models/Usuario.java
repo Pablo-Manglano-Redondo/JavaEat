@@ -1,10 +1,5 @@
 package poo.pl2.models;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -15,7 +10,7 @@ public class Usuario implements Serializable{
     private int edad;
     private String email;
     private String contraseña;
-    public static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
+    public static HashMap<String, Usuario> usuarios = new HashMap<>();
     
     public static HashMap<String, Usuario> getUsuarios() {
         return usuarios;
@@ -106,45 +101,6 @@ public class Usuario implements Serializable{
         return false;
     }
 }
-
-    
-    public static void cargarDatos() {
-        try {
-            //Lectura de los objetos
-            FileInputStream istreamPer = new FileInputStream("copiasegUsers.dat");
-            ObjectInputStream oisPer = new ObjectInputStream(istreamPer);
-            usuarios = (HashMap<String, Usuario>) oisPer.readObject();
-            istreamPer.close();
-        } catch (IOException ioe) {
-            System.out.println("Error de IO: " + ioe.getMessage());
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println("Error de clase no encontrada: " + cnfe.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }//fin cargarDatos
-
-    public static void guardarDatos() {
-        try {
-            //Si hay datos los guardamos...
-            if (!usuarios.isEmpty()) {
-
-                //Serialización
-                FileOutputStream ostreamPer = new FileOutputStream("copiasegUsers.dat");
-                ObjectOutputStream oosPer = new ObjectOutputStream(ostreamPer);
-                oosPer.writeObject(usuarios);
-                ostreamPer.close();
-            } else {
-                System.out.println("Error: No hay datos...");
-            }
-
-        } catch (IOException ioe) {
-            System.out.println("Error de IO: " + ioe.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }//fin guardarDatos
-    
     
 }
 

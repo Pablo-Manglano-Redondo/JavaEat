@@ -2,6 +2,7 @@ package poo.pl2.views;
 
 import poo.pl2.controladores.Login_c;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -51,10 +52,20 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraseñaActionPerformed(evt);
+            }
+        });
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contraseñaKeyPressed(evt);
             }
         });
 
@@ -161,6 +172,30 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         SignInEmpresa signinempresa = new SignInEmpresa(this,true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode()== KeyEvent.VK_ENTER) {
+            if (Login_c.checkUser() == true) {
+            Menu menu = new Menu();
+            this.setVisible(false);
+            }
+            else if (Login_c.checkAdmin() == true) {
+            Admin admin = new Admin(this, true);
+            this.setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Usuario y contraseña no coinciden o no estás registrado en JavaEat");
+
+            }
+    }                                   
+    
+    }//GEN-LAST:event_contraseñaKeyPressed
 
     
     /**

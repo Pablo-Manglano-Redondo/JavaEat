@@ -13,8 +13,10 @@ public class Restaurante {
     private double gastosEnvio;
     private int tiempoMedioEnvio;
     private boolean cateringParaEmpresas;
-    private List<Comida> comidas;
+    public static List<Comida> comidas;
+    public static List<Comida> comidasLabel = new ArrayList<>();
     public static List<Restaurante> restaurantes = new ArrayList<>();
+    
 
     public Restaurante(String descripcion, String cif, String nombre, Direccion direccion, String especialidad, double gastosEnvio, int tiempoMedioEnvio, boolean cateringParaEmpresas) {
         this.descripcion = descripcion;

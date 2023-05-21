@@ -12,6 +12,8 @@ public class Local extends javax.swing.JDialog {
 
     /**
      * Creates new form Local
+     * @param parent
+     * @param modal
      */
     public Local(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -29,7 +31,6 @@ public class Local extends javax.swing.JDialog {
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
         changeFont();
-        System.out.println(Menu.jComboBox1.getSelectedItem().toString() + ".jpg");
         this.setVisible(true);
     }
     
