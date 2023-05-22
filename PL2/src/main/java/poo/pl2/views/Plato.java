@@ -34,11 +34,11 @@ public class Plato extends javax.swing.JDialog {
     private void scaleImageComida() {
         ImageIcon logo = new ImageIcon(Establecimiento.jList2.getSelectedValue() + ".jpg");
         Image img = logo.getImage();
-        Image imgScale = img.getScaledInstance(imagenRestaurante.getWidth(), imagenRestaurante.getHeight(), Image.SCALE_SMOOTH);
+        Image imgScale = img.getScaledInstance(imagenComida.getWidth(), imagenComida.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         this.setLocationRelativeTo(null);
-        imagenRestaurante.setText("");
-        imagenRestaurante.setIcon(scaledIcon);
+        imagenComida.setText("");
+        imagenComida.setIcon(scaledIcon);
     }
     
     private void scaleImage(){
@@ -77,7 +77,7 @@ public class Plato extends javax.swing.JDialog {
 
         Imagen = new javax.swing.JLabel();
         nombreRestaurante = new javax.swing.JLabel();
-        imagenRestaurante = new javax.swing.JLabel();
+        imagenComida = new javax.swing.JLabel();
         descripcionRestaurante = new javax.swing.JLabel();
         cantidad = new javax.swing.JComboBox<>();
         pedido = new javax.swing.JButton();
@@ -90,7 +90,7 @@ public class Plato extends javax.swing.JDialog {
 
         nombreRestaurante.setText("Nombre comida");
 
-        imagenRestaurante.setText("Imagen");
+        imagenComida.setText("Imagen");
 
         descripcionRestaurante.setText("Descripcion e ingredientes");
 
@@ -133,7 +133,7 @@ public class Plato extends javax.swing.JDialog {
                                     .addGap(6, 6, 6)
                                     .addComponent(descripcionRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(71, 71, 71)
-                        .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(imagenComida, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(330, 330, 330)
                         .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +147,7 @@ public class Plato extends javax.swing.JDialog {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imagenComida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
@@ -226,7 +226,7 @@ public class Plato extends javax.swing.JDialog {
     private javax.swing.JLabel Imagen;
     public static javax.swing.JComboBox<Integer> cantidad;
     private javax.swing.JLabel descripcionRestaurante;
-    private javax.swing.JLabel imagenRestaurante;
+    private javax.swing.JLabel imagenComida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombreRestaurante;
     private javax.swing.JButton pedido;
