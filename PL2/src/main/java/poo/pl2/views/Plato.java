@@ -11,7 +11,7 @@ import poo.pl2.models.Restaurante;
  * @author pablo
  */
 public class Plato extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form Plato
      */
@@ -20,14 +20,14 @@ public class Plato extends javax.swing.JDialog {
         initComponents();
     }
 
-    public Plato(java.awt.Frame parent, boolean modal, String nombre, String descripcion, Double precio) {
+    public Plato(java.awt.Frame parent, boolean modal, Double precio, String nombre, String descripcion) {
         super(parent, modal);
         initComponents();
         scaleImage();
         scaleImageComida();
+        price.setText(precio.toString());
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
-        price.setText(precio.toString());
         this.setVisible(true);
     }
     
@@ -171,7 +171,6 @@ public class Plato extends javax.swing.JDialog {
 
     private void cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadActionPerformed
         // TODO add your handling code here:
-        int cantidaad = cantidad.getSelectedIndex();
     }//GEN-LAST:event_cantidadActionPerformed
 
     private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed

@@ -7,8 +7,9 @@ public class Comida {
     
     private String id;
     private String nombre;
-    public static double precio;
+    private double precio;
     private String descripcion;
+    private Restaurante restaurante;
     public static List<Comida> carritos = new ArrayList<>();
     
     public Comida(String nombre, String id, double precio, String descripcion, Restaurante restaurante) {
@@ -16,6 +17,7 @@ public class Comida {
         this.id = id;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.restaurante = restaurante;
     }
     
     public String getNombre() {

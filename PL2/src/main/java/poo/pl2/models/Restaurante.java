@@ -113,22 +113,5 @@ public class Restaurante {
         this.comidas.remove(comida);
     }
 
-    public double calcularPrecioCatering(List<Comida> comidas, List<Servicio> servicios, boolean espacioPrivado) {
-        double totalComidas = 0;
-        for (Comida comida : comidas) {
-            totalComidas += comida.getPrecio();
-        }
-
-        double totalServicios = 0;
-        for (Servicio servicio : servicios) {
-            totalServicios += servicio.getPrecio();
-        }
-
-        double total = totalComidas + totalServicios;
-        if (espacioPrivado) {
-            total += 1000;
-        }
-        return total;
-    }
 }
 

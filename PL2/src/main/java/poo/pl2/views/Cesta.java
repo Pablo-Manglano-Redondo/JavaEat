@@ -12,12 +12,12 @@ import poo.pl2.models.Restaurante;
  */
 public class Cesta extends javax.swing.JDialog {
 
-    private double total = 0.0;
+    private double total;
     
     public Cesta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        updatePrice();
+        calcularCarrito(this.jList1, Comida.carritos);
         populateCart(this.jList1, Comida.carritos);
         this.setVisible(true);
     }
@@ -35,7 +35,7 @@ public class Cesta extends javax.swing.JDialog {
         jl.setModel(model);
     
     }
-    
+
     public Comida getComidaFromItem() { 
     
         List<Comida> comidas = Restaurante.comidas;
@@ -49,12 +49,16 @@ public class Cesta extends javax.swing.JDialog {
         
     }
     
-    public void updatePrice() {
-        
-        int cantidaad = Plato.cantidad.getSelectedIndex();
-        total += getComidaFromItem().getPrecio() * (cantidaad + 1);
-        numero.setText(String.valueOf(total)); //NO SE HACE BIEN LA SUMA POR ESTO
+    public void calcularCarrito(JList jl, List<Comida> carritos) {
+    
+    for (Comida carrito : carritos) {
+        Comida alimento = carrito;
+        total += alimento.getPrecio() * (Plato.cantidad.getSelectedIndex() + 1);
     }
+
+    numero.setText(String.valueOf(total));
+}
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,8 +79,9 @@ public class Cesta extends javax.swing.JDialog {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
         numero = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,12 +118,11 @@ public class Cesta extends javax.swing.JDialog {
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jLabel2.setText("Producto");
+
+        jLabel4.setText("Cantidad");
+
+        jLabel5.setText("Precio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,21 +147,31 @@ public class Cesta extends javax.swing.JDialog {
                 .addComponent(jButton2)
                 .addGap(446, 446, 446))
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(jLabel2)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel4)
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28)
@@ -246,11 +260,12 @@ public class Cesta extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel numero;
     private javax.swing.JLabel precio;
     // End of variables declaration//GEN-END:variables
