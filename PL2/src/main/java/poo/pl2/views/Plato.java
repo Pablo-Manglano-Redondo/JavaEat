@@ -2,12 +2,9 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JList;
 import poo.pl2.models.Comida;
 import poo.pl2.models.Restaurante;
-import poo.pl2.views.Cesta;
 
 /**
  *
@@ -23,13 +20,14 @@ public class Plato extends javax.swing.JDialog {
         initComponents();
     }
 
-    public Plato(java.awt.Frame parent, boolean modal, String nombre, String descripcion) {
+    public Plato(java.awt.Frame parent, boolean modal, String nombre, String descripcion, Double precio) {
         super(parent, modal);
         initComponents();
         scaleImage();
         scaleImageComida();
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
+        price.setText(precio.toString());
         this.setVisible(true);
     }
     
@@ -83,6 +81,8 @@ public class Plato extends javax.swing.JDialog {
         descripcionRestaurante = new javax.swing.JLabel();
         cantidad = new javax.swing.JComboBox<>();
         pedido = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        price = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -109,6 +109,8 @@ public class Plato extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("Precio");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,10 +123,15 @@ public class Plato extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(descripcionRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nombreRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombreRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(58, 58, 58)
+                                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(descripcionRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(71, 71, 71)
                         .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -140,18 +147,23 @@ public class Plato extends javax.swing.JDialog {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pedido))
+                        .addGap(48, 48, 48)
+                        .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(nombreRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(descripcionRestaurante)
-                        .addGap(34, 34, 34))
-                    .addComponent(imagenRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pedido))
-                .addGap(48, 48, 48)
-                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -212,10 +224,12 @@ public class Plato extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
-    private javax.swing.JComboBox<Integer> cantidad;
+    public static javax.swing.JComboBox<Integer> cantidad;
     private javax.swing.JLabel descripcionRestaurante;
     private javax.swing.JLabel imagenRestaurante;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombreRestaurante;
     private javax.swing.JButton pedido;
+    private javax.swing.JLabel price;
     // End of variables declaration//GEN-END:variables
 }
