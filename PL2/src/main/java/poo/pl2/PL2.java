@@ -19,7 +19,7 @@ public class PL2 {
                 5.0, 30, true);
         Restaurante Restaurante2 = new Restaurante("Hola soy el r2", "CIF123", 
                 "Restaurante 2", direccionRestaurante, "Comida Mediterránea",
-                5.0, 30, true);
+                10.0, 30, true);
         
         Restaurante.restaurantes.add(Restaurante1);
         Restaurante.restaurantes.add(Restaurante2);
