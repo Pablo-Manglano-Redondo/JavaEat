@@ -9,7 +9,7 @@ public class PL2 {
 
     public static void main(String[] args) {
         
-        Serializacion.cargarDatos();
+        Serializacion.cargarDatosUsuario();
         
         Direccion direccionRestaurante = new Direccion("Avenida del Sol", 123,
                 "Barcelona", "08001");
@@ -33,18 +33,10 @@ public class PL2 {
         Restaurante.comidas.add(comida2);
         Restaurante.comidas.add(comida3);
         Restaurante.comidas.add(comida4);
-        
-        
-        System.out.println(comida1.getPrecio());
-        System.out.println(comida2.getPrecio());
-        System.out.println(comida3.getPrecio());
-        System.out.println(comida4.getPrecio());
-        
-  
-               
+     
         Login f = new Login();
         f.setVisible (true);
-        Serializacion.guardarDatos();
+        Serializacion.guardarDatosUsuario();
         
     }
 }

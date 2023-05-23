@@ -25,7 +25,7 @@ public class SignInEmpresa extends javax.swing.JDialog {
     }
 
     public void scaleImage(){
-        ImageIcon logo = new ImageIcon("def.png");
+        ImageIcon logo = new ImageIcon("media/def.png");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);

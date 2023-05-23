@@ -14,6 +14,6 @@ public class SignIn_c {
     
     Usuario us = new Usuario(email, contraseña);
     Usuario.introducirUsuario(us);
-    Serializacion.guardarDatos();
+    Serializacion.guardarDatosUsuario();
     }
 }

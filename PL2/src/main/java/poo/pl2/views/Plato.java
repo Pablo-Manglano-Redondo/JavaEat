@@ -32,7 +32,7 @@ public class Plato extends javax.swing.JDialog {
     }
     
     private void scaleImageComida() {
-        ImageIcon logo = new ImageIcon(Establecimiento.jList2.getSelectedValue() + ".jpg");
+        ImageIcon logo = new ImageIcon("media/" + Establecimiento.jList2.getSelectedValue() + ".jpg");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(imagenComida.getWidth(), imagenComida.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);

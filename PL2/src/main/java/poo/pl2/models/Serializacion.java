@@ -14,7 +14,7 @@ import static poo.pl2.models.Usuario.usuarios;
  */
 public class Serializacion {
     
-    public static void cargarDatos() {
+    public static void cargarDatosUsuario() {
         try {
             //Lectura de los objetos
             FileInputStream istreamPer = new FileInputStream("copiasegUsers.dat");
@@ -30,7 +30,7 @@ public class Serializacion {
         }
     }//fin cargarDatos
 
-    public static void guardarDatos() {
+    public static void guardarDatosUsuario() {
         try {
             //Si hay datos los guardamos...
             if (!usuarios.isEmpty()) {
@@ -50,5 +50,5 @@ public class Serializacion {
             System.out.println("Error: " + e.getMessage());
         }
     }//fin guardarDatos
-    
+  
 }

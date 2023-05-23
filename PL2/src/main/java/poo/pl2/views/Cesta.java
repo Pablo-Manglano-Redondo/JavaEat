@@ -52,7 +52,7 @@ public class Cesta extends javax.swing.JDialog {
         
     }
     
-    public Restaurante getRestauranteFromItem() {
+    public final Restaurante getRestauranteFromItem() {
     
         List<Restaurante> restaurantes = Restaurante.restaurantes;
         // Desde un array con todos los restaurantes...
@@ -65,7 +65,7 @@ public class Cesta extends javax.swing.JDialog {
         
     }
     
-    public void calcularCarrito(JList jl, List<Comida> carritos) {
+    public final void calcularCarrito(JList jl, List<Comida> carritos) {
     
     for (Comida carrito : carritos) {
         Comida alimento = carrito;
@@ -76,14 +76,14 @@ public class Cesta extends javax.swing.JDialog {
     
     }
     
-    public void calcularGastosEnvio(Restaurante restaurante) {
+    public final void calcularGastosEnvio(Restaurante restaurante) {
         
         gastosE = restaurante.getGastosEnvio();
         String gastosEnvio = String.valueOf(restaurante.getGastosEnvio());
         precio.setText(gastosEnvio);
     }
     
-    public void calcularPrecioFinal() {
+    public final void calcularPrecioFinal() {
         
         Double precioF = total * 0.9 + gastosE; 
         String precioFinalStr = String.valueOf(precioF);
@@ -270,6 +270,7 @@ public class Cesta extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 Cesta dialog = new Cesta(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

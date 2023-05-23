@@ -14,8 +14,7 @@ public class AAAAA {
     
     KNOWN PROBLEMS:
     
-    El valor de la cesta no se actualiza.
-    El precio de los platos no va bien, se queda con el del ultimo objeto instanciado.
+    cargarDatosComentario introduce el fallo
     
     */
     /*
