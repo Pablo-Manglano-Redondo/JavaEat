@@ -1,7 +1,7 @@
 package poo.pl2.controladores;
+
 import poo.pl2.views.Login;
 import poo.pl2.models.Usuario;
-import poo.pl2.views.Menu;
 
 public class Login_c {
     
@@ -27,4 +27,5 @@ public class Login_c {
     } 
     return false;
     }
+
 }

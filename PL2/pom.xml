@@ -11,4 +11,13 @@
         <maven.compiler.target>19</maven.compiler.target>
         <exec.mainClass>poo.pl2.PL2</exec.mainClass>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+    </dependencies>
 </project>
+

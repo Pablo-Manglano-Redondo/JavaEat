@@ -147,11 +147,11 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (Login_c.checkUser() == true) {
+        if (Login_c.checkUser()) {
             Menu menu = new Menu();
             this.setVisible(false);
         }
-        else if (Login_c.checkAdmin() == true) {
+        else if (Login_c.checkAdmin()) {
             Admin admin = new Admin(this, true);
             this.setVisible(false);
         }

@@ -51,5 +51,11 @@ public class Comida {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+    
+    
 }
 

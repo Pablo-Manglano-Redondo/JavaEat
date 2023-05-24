@@ -174,7 +174,9 @@ public class Establecimiento extends javax.swing.JFrame {
         
         for(Comida comida : comidas) {
         
+            if (comida.getRestaurante().equals(getRestauranteFromItem())) {
             model.addElement(comida.getNombre());
+        }
             
         }
         
@@ -593,10 +595,10 @@ public class Establecimiento extends javax.swing.JFrame {
     private javax.swing.JLabel imagenRestaurante;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
+    public static javax.swing.JCheckBox jCheckBox1;
+    public static javax.swing.JCheckBox jCheckBox2;
+    public static javax.swing.JCheckBox jCheckBox3;
+    public static javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
