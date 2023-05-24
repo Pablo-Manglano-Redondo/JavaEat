@@ -7,8 +7,10 @@ import java.time.LocalTime;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import poo.pl2.controladores.SignIn_c;
 import poo.pl2.models.Comida;
 import poo.pl2.models.Restaurante;
+import poo.pl2.models.Usuario;
 
 /**
  *
@@ -98,11 +100,11 @@ public class Cesta extends javax.swing.JDialog {
             List<Comida> comidas, List<Integer> cantidades, Usuario us) {
         try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
             // Formatear la fecha de venta
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            String fechaFormateada = dateFormat.format(fechaVenta);
+            //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            //String fechaFormateada = dateFormat.format(fechaVenta);
 
             // Escribir los datos en el archivo
-            fileWriter.write("Fecha de Venta: " + fechaFormateada + "\n");
+            //fileWriter.write("Fecha de Venta: " + fechaFormateada + "\n");
             fileWriter.write("Restaurante: " + restaurante.getNombre() + "\n");
             fileWriter.write("Dirección del Restaurante: " + restaurante.getDireccion() + "\n");
             fileWriter.write("Comidas Compradas:\n");
@@ -126,7 +128,8 @@ public class Cesta extends javax.swing.JDialog {
     public final void calcularPrecioFinal() {
         
         if (getRestauranteFromItem().isCateringParaEmpresas()) {
-            if (Establecimiento.jCheckBox1.isSelected() || Establecimiento.jCheckBox2.isSelected() || Establecimiento.jCheckBox3.isSelected() || Establecimiento.jCheckBox4.isSelected()) {
+            if (Establecimiento.jCheckBox1.isSelected() || Establecimiento.jCheckBox2.isSelected() || 
+                    Establecimiento.jCheckBox3.isSelected() || Establecimiento.jCheckBox4.isSelected()) {
                 gastosE = 0;
                 precio.setText("0.0");
             }
@@ -139,7 +142,17 @@ public class Cesta extends javax.swing.JDialog {
             String precioFinalStr = String.valueOf(precioF);
             precioFinal.setText(precioFinalStr);
         }
+    }
+    
+    public Usuario buscarUsuario(String email, String contraseña, List<Usuario> usuarios) {
+    for (Usuario usuario : usuarios) {
+        if (usuario.getEmail().equals(email) && usuario.getContraseña().equals(contraseña)) {
+            return usuario;
+        }
+    }
+    return null; // Si no se encuentra un usuario con el mismo nombre y email
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,10 +260,17 @@ public class Cesta extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //fecha de venta, los datos del restaurante y las comidas compradas, su cantidad y datos del cliente
-        LocalTime fechaVenta = LocalTime.now();
-        String fecha = fechaVenta.toString();
-        exportarDatos("venta.txt", fecha, getRestauranteFromItem(), Comida.carritos,
-                Plato.cantidades , Login.usuario.getText());
+        //LocalTime fechaVenta = LocalTime.now();
+        
+        char[] passwordChars = SignIn.Password.getPassword();
+        String contraseña = String.valueOf(passwordChars);
+
+        //String fecha = fechaVenta.toString();
+        exportarDatos("venta.txt", "d", getRestauranteFromItem(),
+                Comida.carritos,
+                
+                Plato.cantidades , buscarUsuario(Login.usuario.getText(),
+                        contraseña, Usuario.listaUsuarios));
         
         //Almacenar datos
     }//GEN-LAST:event_jButton2ActionPerformed

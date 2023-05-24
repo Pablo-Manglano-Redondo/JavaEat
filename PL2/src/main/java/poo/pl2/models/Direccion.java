@@ -3,11 +3,11 @@ package poo.pl2.models;
 public class Direccion {
     
     private String calle;
-    private int numero;
+    private String numero;
     private String ciudad;
     private String codigoPostal;
 
-    public Direccion(String calle, int numero, String ciudad, String codigoPostal) {
+    public Direccion(String calle, String numero, String ciudad, String codigoPostal) {
         this.calle = calle;
         this.numero = numero;
         this.ciudad = ciudad;
@@ -18,7 +18,7 @@ public class Direccion {
         return calle;
     }    
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -34,7 +34,7 @@ public class Direccion {
         this.calle = calle;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

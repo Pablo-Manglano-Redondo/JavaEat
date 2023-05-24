@@ -1,7 +1,9 @@
 package poo.pl2.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Usuario implements Serializable {
 
@@ -14,6 +16,8 @@ public class Usuario implements Serializable {
     private String telefono;
     private String dni;
 
+    public static List<Usuario> listaUsuarios = new ArrayList<>();
+    
     public static HashMap<String, Usuario> usuarios = new HashMap<>();
 
     public static HashMap<String, Usuario> getUsuarios() {

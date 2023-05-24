@@ -12,7 +12,7 @@ public class PL2 {
         
         Serializacion.cargarDatosUsuario();
         
-        Direccion direccionRestaurante = new Direccion("Avenida del Sol", 123,
+        Direccion direccionRestaurante = new Direccion("Avenida del Sol", "123",
                 "Barcelona", "08001");
         
         Restaurante Restaurante1 = new Restaurante("Hola soy el r1", "CIF123", 

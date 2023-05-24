@@ -18,13 +18,16 @@ public class SignIn_c {
     String telefono = SignIn.Telefono.getText();
     String nombre = SignIn.Nombre.getText();
     
-    Direccion direccion = new Direccion(Direccion_v.calle.getText(), (int) Direccion_v.numero.getValue(), 
+    Direccion direccion = new Direccion(Direccion_v.calle.getText(), Direccion_v.numero.getText(), 
             Direccion_v.localidad.getText(), Direccion_v.codigoPostal.getText());
     
     TarjetaCredito tarjeta = new TarjetaCredito(TarjetaCredito_v.numeroTarjeta.getText(), 
      TarjetaCredito_v.titular.getText(), TarjetaCredito_v.fechaNacimiento.getText());
     
     Usuario us = new Usuario(nombre, email, contraseña, direccion, tarjeta, telefono, dni);
+    
+    Usuario.listaUsuarios.add(us);
+    
     Usuario.introducirUsuario(us);
     Serializacion.guardarDatosUsuario();
     }
