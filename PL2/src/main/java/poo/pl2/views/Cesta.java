@@ -22,6 +22,7 @@ public class Cesta extends javax.swing.JDialog {
         calcularGastosEnvio(getRestauranteFromItem());
         calcularPrecioFinal();
         populateCart(this.jList1, Comida.carritos);
+        Establecimiento.precioCatering();
         this.setVisible(true);
     }
 
@@ -38,7 +39,7 @@ public class Cesta extends javax.swing.JDialog {
         jl.setModel(model);
     
     }
-
+    
     public Comida getComidaFromItem() { 
     
         List<Comida> comidas = Restaurante.comidas;
@@ -85,9 +86,17 @@ public class Cesta extends javax.swing.JDialog {
     
     public final void calcularPrecioFinal() {
         
-        Double precioF = total * 0.9 + gastosE; 
-        String precioFinalStr = String.valueOf(precioF);
-        precioFinal.setText(precioFinalStr);
+        if (getRestauranteFromItem().isCateringParaEmpresas()) {
+            Double precioF = total + Establecimiento.precioCatering(); 
+            String precioFinalStr = String.valueOf(precioF);
+            precioFinal.setText(precioFinalStr);
+            precio.setText("0.0");
+        }
+        else {
+            Double precioF = total * 0.9 + gastosE; 
+            String precioFinalStr = String.valueOf(precioF);
+            precioFinal.setText(precioFinalStr);
+        }
 }
 
     /**
@@ -239,6 +248,8 @@ public class Cesta extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //BOTON DE CREAR LA VENTA
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
