@@ -1,8 +1,12 @@
 package poo.pl2.controladores;
 import org.apache.commons.validator.routines.EmailValidator;
+import poo.pl2.models.Direccion;
 import poo.pl2.models.Serializacion;
+import poo.pl2.models.TarjetaCredito;
 import poo.pl2.models.Usuario;
+import poo.pl2.views.Direccion_v;
 import poo.pl2.views.SignIn;
+import poo.pl2.views.TarjetaCredito_v;
 
 public class SignIn_c {
     
@@ -10,10 +14,17 @@ public class SignIn_c {
         
     String email = SignIn.Correo.getText();
     String contraseña = new String(SignIn.Password.getPassword());
+    String dni = SignIn.DNI.getText();
+    String telefono = SignIn.Telefono.getText();
+    String nombre = SignIn.Nombre.getText();
     
-    //Hacer lo mismo con el resto de campos
+    Direccion direccion = new Direccion(Direccion_v.calle.getText(), (int) Direccion_v.numero.getValue(), 
+            Direccion_v.localidad.getText(), Direccion_v.codigoPostal.getText());
     
-    Usuario us = new Usuario(email, contraseña);
+    TarjetaCredito tarjeta = new TarjetaCredito(TarjetaCredito_v.numeroTarjeta.getText(), 
+     TarjetaCredito_v.titular.getText(), TarjetaCredito_v.fechaNacimiento.getText());
+    
+    Usuario us = new Usuario(nombre, email, contraseña, direccion, tarjeta, telefono, dni);
     Usuario.introducirUsuario(us);
     Serializacion.guardarDatosUsuario();
     }

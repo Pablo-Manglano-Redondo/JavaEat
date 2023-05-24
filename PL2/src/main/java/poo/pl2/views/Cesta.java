@@ -1,5 +1,9 @@
 package poo.pl2.views;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -27,18 +31,24 @@ public class Cesta extends javax.swing.JDialog {
     }
 
     private void populateCart(JList<String> carro) {
-        
-        Comida selectedComida = getComidaFromItem();
-        if (selectedComida != null) {
-            String details = "Nombre: " + selectedComida.getNombre() +
-                    ", Cantidad: " + Plato.cantidad.getSelectedIndex() + 1 +
-                    ", Precio: $" + selectedComida.getPrecio();
-            //carro.setText(details);
-            DefaultListModel<String> detalles = new DefaultListModel<>();
-            detalles.addElement(details);
-            carro.setModel(detalles);
+        DefaultListModel<String> detalles = new DefaultListModel<>();
+        int i = 0;
+        int j = 0;
+        for (Comida comida : Comida.carritos) {
+            Comida selectedComida = Comida.carritos.get(i++);
+
+            if (selectedComida != null) {
+                String details = "Nombre: " + selectedComida.getNombre() +
+                        ", Cantidad: " + Plato.cantidades.get(j++) +
+                        ", Precio: $" + selectedComida.getPrecio();
+
+                detalles.addElement(details);
+            }
         }
+
+        carro.setModel(detalles);
     }
+
 
     public Comida getComidaFromItem() { 
     
@@ -83,6 +93,35 @@ public class Cesta extends javax.swing.JDialog {
         String gastosEnvio = String.valueOf(restaurante.getGastosEnvio());
         precio.setText(gastosEnvio);
     }
+    
+    public static void exportarDatos(String nombreArchivo, String fechaVenta, Restaurante restaurante,
+            List<Comida> comidas, List<Integer> cantidades, Usuario us) {
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+            // Formatear la fecha de venta
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            String fechaFormateada = dateFormat.format(fechaVenta);
+
+            // Escribir los datos en el archivo
+            fileWriter.write("Fecha de Venta: " + fechaFormateada + "\n");
+            fileWriter.write("Restaurante: " + restaurante.getNombre() + "\n");
+            fileWriter.write("Dirección del Restaurante: " + restaurante.getDireccion() + "\n");
+            fileWriter.write("Comidas Compradas:\n");
+            for (int i = 0; i < comidas.size(); i++) {
+                Comida comida = comidas.get(i);
+                int cantidad = cantidades.get(i);
+                fileWriter.write("- " + comida.getNombre() + " (Cantidad: " + cantidad + ", Precio: $" + comida.getPrecio() + ")\n");
+            }
+            fileWriter.write("\nDatos del Cliente:\n");
+            fileWriter.write("Nombre: " + us.getNombre() + "\n");
+            fileWriter.write("Correo Electrónico: " + us.getEmail() + "\n");
+            fileWriter.write("Dirección de Envío: " + us.getDireccion() + "\n");
+
+            System.out.println("Datos exportados exitosamente al archivo " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al exportar los datos al archivo " + nombreArchivo + ": " + e.getMessage());
+        }
+    }
+    
     
     public final void calcularPrecioFinal() {
         
@@ -156,55 +195,50 @@ public class Cesta extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(59, 59, 59)
-                                .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(47, 47, 47)
-                                    .addComponent(precioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(203, 203, 203)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(398, 398, 398)
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(164, 164, 164)
+                                        .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(147, 147, 147))
+                                        .addComponent(precioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel1))
+                        .addGap(248, 248, 248)
                         .addComponent(jButton2)))
-                .addGap(231, 260, Short.MAX_VALUE))
+                .addGap(260, 260, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(precioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(148, Short.MAX_VALUE))))
+                            .addComponent(precioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,9 +246,13 @@ public class Cesta extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //BOTON DE CREAR LA VENTA
+        //fecha de venta, los datos del restaurante y las comidas compradas, su cantidad y datos del cliente
+        LocalTime fechaVenta = LocalTime.now();
+        String fecha = fechaVenta.toString();
+        exportarDatos("venta.txt", fecha, getRestauranteFromItem(), Comida.carritos,
+                Plato.cantidades , Login.usuario.getText());
         
-        
+        //Almacenar datos
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -11,6 +11,7 @@ public class AAAAA {
     KNOWN PROBLEMS:
     
     cargarDatosComentario introduce el fallo
+    exportar a txt no funciona
     
     */
     /*

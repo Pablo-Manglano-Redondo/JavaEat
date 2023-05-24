@@ -23,37 +23,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
-              <Component id="Submit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="404" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="Imagen" min="-2" pref="95" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="Telefono" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                  <Component id="Password" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                  <Component id="Correo" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                  <Component id="DNI" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Web" alignment="0" max="32767" attributes="0"/>
-                          <Component id="Nombre" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="559" pref="559" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
+                      <Component id="Submit" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="Imagen" min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="Telefono" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="Password" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="Correo" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                          <Component id="DNI" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="Nombre" max="32767" attributes="0"/>
+                          <Component id="jButton2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="Web" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace min="404" pref="486" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -1,6 +1,7 @@
 package poo.pl2.views;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import poo.pl2.models.Comida;
@@ -11,6 +12,8 @@ import poo.pl2.models.Restaurante;
  * @author pablo
  */
 public class Plato extends javax.swing.JDialog {
+    
+    public static ArrayList<Integer> cantidades = new ArrayList<>();
     
     /**
      * Creates new form Plato
@@ -177,6 +180,7 @@ public class Plato extends javax.swing.JDialog {
         // TODO add your handling code here:
         Comida value = getComidaFromItem();
         Comida.carritos.add(value);
+        cantidades.add(Plato.cantidad.getSelectedIndex() + 1);
     }//GEN-LAST:event_pedidoActionPerformed
 
     /**
