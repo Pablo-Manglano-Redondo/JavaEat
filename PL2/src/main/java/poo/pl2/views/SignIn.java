@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import poo.pl2.controladores.SignIn_c;
+import poo.pl2.models.Usuario;
 
 
 public class SignIn extends javax.swing.JDialog {
@@ -18,6 +19,8 @@ public class SignIn extends javax.swing.JDialog {
         TextPrompt DNII = new TextPrompt("DNI", DNI);
         TextPrompt Nombree = new TextPrompt("Nombre", Nombre);
         TextPrompt Webb = new TextPrompt("Web", Web);
+        
+        this.setTitle("Registro | JavaEat");
         
         scaleImage();
         
@@ -186,6 +189,7 @@ public class SignIn extends javax.swing.JDialog {
         else if (SignIn_c.emailValidator(Correo.getText()) ) {
             // PONER AQUI LAS EXCEPCIONES
 
+            
             SignIn_c.registerUser();
             JOptionPane.showMessageDialog(this, "Usuario registrado con éxito");
             this.setVisible(false);

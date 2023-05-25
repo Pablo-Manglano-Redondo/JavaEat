@@ -1,11 +1,13 @@
 package poo.pl2.views;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import poo.pl2.models.Restaurante;
+import poo.pl2.models.Usuario;
 
 /**
  *
@@ -14,11 +16,17 @@ import poo.pl2.models.Restaurante;
 
 public class Menu extends javax.swing.JFrame {
     
+    char[] passwordChars = Login.contraseña.getPassword();
+    String contraseña = String.valueOf(passwordChars);
+    
+    boolean catering = false;
+    
     public Menu() {
         
         initComponents();
         scaleImage();
-        populateItemBox(this.jList1, Restaurante.restaurantes);
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()), catering);
         this.setVisible(true);
         
     }
@@ -34,22 +42,65 @@ public class Menu extends javax.swing.JFrame {
         Imagen.setIcon(scaledIcon);
 
     }
-    
-    private void populateItemBox(JList jl, List<Restaurante> restaurantes) {
-    
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
-        for(Restaurante restaurante : restaurantes) {
-        
-            //INTRODUCIR AQUI EL CODIGO POSTAL Y EL FILTRO               ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            
-            model.addElement(restaurante.getNombre());
-            
+
+    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario/*, String opcionOrdenacion*/, boolean filtroCatering) {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        String primerosDigitos = codigoPostalUsuario.substring(0, 4);
+        boolean restauranteEncontrado = false;
+
+        // Aplicar filtro de servicio de catering
+        if (filtroCatering) {
+            restaurantes = filtrarPorCatering(restaurantes, true);
         }
-        
+
+        /*// Aplicar ordenación
+        if (opcionOrdenacion.equals("Relevancia")) {
+            ordenarPorRelevancia(restaurantes);
+        } else if (opcionOrdenacion.equals("Tiempo medio de envío")) {
+            ordenarPorTiempoMedioEnvio(restaurantes);
+        }*/
+
+        for (Restaurante restaurante : restaurantes) {
+            String codigoPostalRestaurante = restaurante.getDireccion().getCodigoPostal();
+            if (codigoPostalRestaurante.startsWith(primerosDigitos)) {
+                model.addElement(restaurante.getNombre());
+                restauranteEncontrado = true;
+            }
+        }
+
+        if (!restauranteEncontrado) {
+            model.addElement("Ningún restaurante en la zona");
+        }
+
         jl.setModel(model);
-    
     }
+
+    // Método auxiliar para filtrar los restaurantes por disponibilidad de servicio de catering
+    private List<Restaurante> filtrarPorCatering(List<Restaurante> restaurantes, boolean cateringDisponible) {
+        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+
+        for (Restaurante restaurante : restaurantes) {
+            if (restaurante.isCateringParaEmpresas() == cateringDisponible) {
+                restaurantesFiltrados.add(restaurante);
+            }
+        }
+
+        return restaurantesFiltrados;
+    }
+
+    // Método auxiliar para ordenar los restaurantes por relevancia
+    private void ordenarPorRelevancia(List<Restaurante> restaurantes) {
+        // Implementa la lógica de ordenación por relevancia según tus criterios
+        // ...
+    }
+
+    // Método auxiliar para ordenar los restaurantes por tiempo medio de envío
+    private void ordenarPorTiempoMedioEnvio(List<Restaurante> restaurantes) {
+        // Implementa la lógica de ordenación por tiempo medio de envío según tus criterios
+        // ...
+    }
+
+
     
     public String obtenerDescripcion(Restaurante restaurante) {
         
@@ -89,6 +140,11 @@ public class Menu extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,30 +177,71 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel4.setText("Especialidad");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("jButton3");
+
+        jButton4.setText("jButton4");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        reset.setText("resetear filtros");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(674, 674, 674)
-                            .addComponent(jButton2)
-                            .addGap(15, 15, 15))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(309, 309, 309)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel1)
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel2)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel4)
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(674, 674, 674)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(309, 309, 309)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(reset))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(62, 62, 62)
+                                        .addComponent(jLabel1)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(jLabel2)
+                                        .addGap(61, 61, 61))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(88, 88, 88)
+                                        .addComponent(jButton4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3)
+                                        .addGap(132, 132, 132)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(110, 110, 110)
+                                        .addComponent(jButton1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(55, 55, 55)
+                                        .addComponent(jLabel3)))))
+                        .addGap(100, 100, 100)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,8 +253,20 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(reset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -181,6 +290,19 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         DatosPersonales datos = new DatosPersonales(this,true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        catering = true;
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()), catering);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()), false);
+    }//GEN-LAST:event_resetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,12 +341,17 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     public static javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 }

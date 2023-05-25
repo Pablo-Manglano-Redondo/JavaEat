@@ -17,7 +17,7 @@ public class PL2 {
         TarjetaCredito tarjetaUsuario = new TarjetaCredito("4817432343", "yo", "04/06/4324");
             
         Direccion direccionUsuario = new Direccion("Avenida de la Luna", "12345",
-                "Madrid", "800001");  
+                "Madrid", "19198");  
         
         Usuario usuario1 = new Usuario("pablo", "pablomanglano4235@gmail.com", "pablo", direccionUsuario, tarjetaUsuario, "608 05 96 62", "03492382Q");
         Usuario usuario2 = new Usuario("pepe", "pepemanglano4235@gmail.com", "pepe", direccionUsuario, tarjetaUsuario, "608 05 96 63", "03492382K");
@@ -26,22 +26,30 @@ public class PL2 {
         Usuario.usuarios.put(usuario1.getEmail(), usuario1);
         Usuario.usuarios.put(usuario2.getEmail(), usuario2);
         Usuario.usuarios.put(usuario3.getEmail(), usuario3);
+        
+        Usuario.listaUsuarios.add(usuario1);
+        Usuario.listaUsuarios.add(usuario2);
+        Usuario.listaUsuarios.add(usuario3);
+        
             
         Direccion direccionRestaurante = new Direccion("Avenida del Sol", "123",
-                "Barcelona", "08001");
+                "Barcelona", "19198");
+        
+        Direccion direccionRestaurante2 = new Direccion("Avenida del Sol", "123",
+                "Barcelona", "19188");
         
         Restaurante Restaurante1 = new Restaurante("Hola soy el r1", "CIF123", 
                 "Restaurante 1", direccionRestaurante, "Comida Mediterránea", 
                 5.0, 30, true);
         Restaurante Restaurante2 = new Restaurante("Hola soy el r2", "CIF123", 
-                "Restaurante 2", direccionRestaurante, "Comida Mediterránea",
-                10.0, 30, false);
+                "Restaurante 2", direccionRestaurante2, "Comida Mediterránea",
+                10.0, 40, false);
         Restaurante Restaurante3 = new Restaurante("Hola soy el r3", "CIF123", 
                 "Restaurante 3", direccionRestaurante, "Comida Mediterránea", 
-                5.0, 30, true);
+                5.0, 50, false);
         Restaurante Restaurante4 = new Restaurante("Hola soy el r4", "CIF123", 
-                "Restaurante 4", direccionRestaurante, "Comida Mediterránea",
-                10.0, 30, false);
+                "Restaurante 4", direccionRestaurante2, "Comida Mediterránea",
+                10.0, 60, false);
         
         Restaurante.restaurantes.add(Restaurante1);
         Restaurante.restaurantes.add(Restaurante2);

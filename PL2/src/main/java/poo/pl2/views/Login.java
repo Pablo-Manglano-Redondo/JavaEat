@@ -17,6 +17,8 @@ public class Login extends javax.swing.JFrame {
         TextPrompt usuarioo = new TextPrompt("Usuario", usuario);
         TextPrompt contraseñaa = new TextPrompt("Contraseña", contraseña);
         
+        this.setTitle("Login | JavaEat");
+        
         scaleImage(); //método para insertar una imagen en una etiqueta y reajustar el tamaño de la imagen a la etiqueta
     }
     

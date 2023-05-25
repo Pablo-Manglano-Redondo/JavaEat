@@ -2,6 +2,7 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import poo.pl2.models.Usuario;
 
 public class DatosPersonales extends javax.swing.JDialog {
 
@@ -16,6 +17,8 @@ public class DatosPersonales extends javax.swing.JDialog {
         TextPrompt Direccionn = new TextPrompt("Dirección", Direccion);
         TextPrompt Tarjetaa = new TextPrompt("Tarjeta", Tarjeta);
         TextPrompt Webb = new TextPrompt("Web", Web);
+        
+        poblarCampos();
         
         scaleImage();
         
@@ -32,6 +35,18 @@ public class DatosPersonales extends javax.swing.JDialog {
         Imagen.setIcon(scaledIcon);
     }
 
+    public void poblarCampos() {
+        
+        char[] passwordChars = Login.contraseña.getPassword();
+        String contraseña = String.valueOf(passwordChars);
+        Usuario user = Cesta.buscarUsuario(Login.usuario.getText(), contraseña, Usuario.listaUsuarios);
+        Correo.setText(user.getEmail());
+        Password.setText(contraseña);
+        DNI.setText(user.getDni());
+        Telefono.setText(user.getTelefono());
+        Nombre.setText(user.getNombre());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +81,7 @@ public class DatosPersonales extends javax.swing.JDialog {
             }
         });
 
+        Correo.setEditable(false);
         Correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CorreoActionPerformed(evt);
@@ -83,6 +99,8 @@ public class DatosPersonales extends javax.swing.JDialog {
                 SubmitActionPerformed(evt);
             }
         });
+
+        Password.setEditable(false);
 
         Imagen.setText("jLabel1");
 
@@ -155,10 +173,6 @@ public class DatosPersonales extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_WebActionPerformed
 
-    private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CorreoActionPerformed
-
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
         //CAMBIAR LOS DATOS
     }//GEN-LAST:event_SubmitMouseClicked
@@ -170,6 +184,10 @@ public class DatosPersonales extends javax.swing.JDialog {
     private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DNIActionPerformed
+
+    private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CorreoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,12 +232,12 @@ public class DatosPersonales extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField Correo;
+    private javax.swing.JTextField Correo;
     public static javax.swing.JTextField DNI;
     public static javax.swing.JTextField Direccion;
     private javax.swing.JLabel Imagen;
     public static javax.swing.JTextField Nombre;
-    public static javax.swing.JPasswordField Password;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JButton Submit;
     public static javax.swing.JTextField Tarjeta;
     public static javax.swing.JTextField Telefono;

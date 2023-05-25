@@ -2,6 +2,7 @@ package poo.pl2.views;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -16,7 +17,7 @@ import poo.pl2.models.Usuario;
  *
  * @author pablo
  */
-public class Cesta extends javax.swing.JDialog {
+public class Cesta extends javax.swing.JDialog implements Serializable {
 
     protected double total;
     protected double gastosE;
@@ -106,6 +107,13 @@ public class Cesta extends javax.swing.JDialog {
         return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
     }
     
+    public static String devolverCodigoPostalUsuario(Direccion direccion) {
+        
+        String codigoPostal = direccion.getCodigoPostal();
+        
+        return codigoPostal;
+    }
+    
     public static String devolverDireccionRestaurante(Direccion direccion) {
         
         String localidad = direccion.getCiudad();
@@ -168,7 +176,7 @@ public class Cesta extends javax.swing.JDialog {
         }
     }
     
-    public Usuario buscarUsuario(String email, String contraseña, List<Usuario> usuarios) {
+    public static Usuario buscarUsuario(String email, String contraseña, List<Usuario> usuarios) {
     for (Usuario usuario : usuarios) {
         if (usuario.getEmail().equals(email) && usuario.getContraseña().equals(contraseña)) {
             return usuario;
