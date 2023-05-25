@@ -1,10 +1,15 @@
 package poo.pl2.views;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -21,6 +26,7 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
 
     protected double total;
     protected double gastosE;
+    public static List<String> ventaData = new ArrayList<>();
     
     public Cesta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -64,6 +70,34 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
             
         }).findAny().get();
         
+    }
+    
+    private static void serializarVentaData(List<String> ventaData, String nombreArchivo) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(nombreArchivo);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            
+            objectOutputStream.writeObject(ventaData);
+            System.out.println("VentaData serializada y guardada en el archivo " + nombreArchivo);
+            
+        } catch (IOException e) {
+            System.out.println("Error al serializar y guardar VentaData en el archivo " + nombreArchivo + ": " + e.getMessage());
+        }
+    }
+    
+    public static List<String> cargarVentaData() {
+        List<String> ventaData = null;
+        
+        try (FileInputStream fileInputStream = new FileInputStream("CopiaSegVentas.dat");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            
+            ventaData = (ArrayList<String>) objectInputStream.readObject();
+            System.out.println("VentaData cargada exitosamente del archivo ventaData.ser");
+            
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al cargar VentaData del archivo ventaData.ser: " + e.getMessage());
+        }
+        
+        return ventaData;
     }
     
     public final Restaurante getRestauranteFromItem() {
@@ -114,6 +148,7 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
         return codigoPostal;
     }
     
+    
     public static String devolverDireccionRestaurante(Direccion direccion) {
         
         String localidad = direccion.getCiudad();
@@ -124,14 +159,51 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
         return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
     }
     
-    public static void exportarDatos(String nombreArchivo, String fechaVenta, Restaurante restaurante,
+    public static void exportarVenta(Restaurante restaurante, List<Comida> comidas, List<Integer> cantidades, Usuario usuario) {
+        
+        LocalTime horaActual = LocalTime.now(); 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String fecha = horaActual.format(formatter); 
+        
+        String nombreRestaurante = restaurante.getNombre();
+        String direccionRestaurante = devolverDireccionRestaurante(restaurante.getDireccion());
+        
+        List<String> datosComidas = new ArrayList<>();
+        for (int i = 0; i < comidas.size(); i++) {
+            Comida comida = comidas.get(i);
+            int cantidad = cantidades.get(i);
+            String datosComida = comida.getNombre() + " (Cantidad: " + cantidad + ", Precio: $" + comida.getPrecio() + ")";
+            datosComidas.add(datosComida);
+        }
+        
+        String nombreCliente = usuario.getNombre();
+        String correoCliente = usuario.getEmail();
+        String direccionCliente = devolverDireccionUsuario(usuario.getDireccion());
+        
+        List<String> ventaData = new ArrayList<>();
+        ventaData.add("Fecha de Venta: " + fecha);
+        ventaData.add("Restaurante: " + nombreRestaurante);
+        ventaData.add("Dirección del Restaurante: " + direccionRestaurante);
+        ventaData.add("Comidas Compradas:");
+        ventaData.addAll(datosComidas);
+        ventaData.add("Datos del Cliente:");
+        ventaData.add("Nombre: " + nombreCliente);
+        ventaData.add("Correo Electrónico: " + correoCliente);
+        ventaData.add("Dirección de Envío: " + direccionCliente);
+        
+        // Agregar ventaData al ArrayList o realizar cualquier otra operación necesaria
+        
+       
+    }
+    
+    public static void exportarDatos(String nombreArchivo, Restaurante restaurante,
             List<Comida> comidas, List<Integer> cantidades, Usuario us){
             
         
-            LocalTime horaActual = LocalTime.now(); 
-            // Formatear la hora como una cadena de texto
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String horaTexto = horaActual.format(formatter); 
+        LocalTime horaActual = LocalTime.now(); 
+        // Formatear la hora como una cadena de texto
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaTexto = horaActual.format(formatter); 
             
             
         try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
@@ -291,20 +363,22 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //fecha de venta, los datos del restaurante y las comidas compradas, su cantidad y datos del cliente
-        //LocalTime fechaVenta = LocalTime.now();
         
-        char[] passwordChars = SignIn.Password.getPassword();
+        char[] passwordChars = Login.contraseña.getPassword();
         String contraseña = String.valueOf(passwordChars);
 
-        //String fecha = fechaVenta.toString();
-        exportarDatos("venta.txt", "d", getRestauranteFromItem(),
+        exportarDatos("venta.txt", getRestauranteFromItem(),
                 Comida.carritos,
                 
                 Plato.cantidades , buscarUsuario(Login.usuario.getText(),
                         contraseña, Usuario.listaUsuarios));
         
         //Almacenar datos
+        exportarVenta(getRestauranteFromItem(), Comida.carritos, Plato.cantidades, buscarUsuario(Login.usuario.getText(),
+                        contraseña, Usuario.listaUsuarios));
+        
+        serializarVentaData(ventaData, "CopiaSegVentas.dat");
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
