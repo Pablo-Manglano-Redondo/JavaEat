@@ -20,13 +20,15 @@ public class Menu extends javax.swing.JFrame {
     String contraseña = String.valueOf(passwordChars);
     
     boolean catering = false;
+    boolean relevancia = false;
+    String especialidad;
     
     public Menu() {
         
         initComponents();
         scaleImage();
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), catering);
+                Usuario.listaUsuarios).getDireccion()), especialidad, false, relevancia ,catering);
         this.setVisible(true);
         
     }
@@ -43,22 +45,25 @@ public class Menu extends javax.swing.JFrame {
 
     }
 
-    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario/*, String opcionOrdenacion*/, boolean filtroCatering) {
+    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering) {
+        
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         String primerosDigitos = codigoPostalUsuario.substring(0, 4);
         boolean restauranteEncontrado = false;
 
         // Aplicar filtro de servicio de catering
-        if (filtroCatering) {
+        if (especialidadBool) {
+            restaurantes = filtrarPorEspecialidad(restaurantes, especialidad);
+        }
+        
+        else if (filtroCatering) {
             restaurantes = filtrarPorCatering(restaurantes, true);
         }
+        
+        else if (filtroTiempoEnvio) {
+            restaurantes = filtrarPorTiempoEnvio(restaurantes, true);
+        }
 
-        /*// Aplicar ordenación
-        if (opcionOrdenacion.equals("Relevancia")) {
-            ordenarPorRelevancia(restaurantes);
-        } else if (opcionOrdenacion.equals("Tiempo medio de envío")) {
-            ordenarPorTiempoMedioEnvio(restaurantes);
-        }*/
 
         for (Restaurante restaurante : restaurantes) {
             String codigoPostalRestaurante = restaurante.getDireccion().getCodigoPostal();
@@ -75,8 +80,25 @@ public class Menu extends javax.swing.JFrame {
         jl.setModel(model);
     }
 
-    // Método auxiliar para filtrar los restaurantes por disponibilidad de servicio de catering
+    private List<Restaurante> filtrarPorEspecialidad(List<Restaurante> restaurantes, String especialidad) {
+
+        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+
+
+        for (Restaurante restaurante : restaurantes) {
+            if (restaurante.getEspecialidad().equals(especialidad)) {
+                System.out.println("coinciden");
+                restaurantesFiltrados.add(restaurante);
+            }
+        }
+
+        return restaurantesFiltrados;
+
+    }
+    
+
     private List<Restaurante> filtrarPorCatering(List<Restaurante> restaurantes, boolean cateringDisponible) {
+        
         List<Restaurante> restaurantesFiltrados = new ArrayList<>();
 
         for (Restaurante restaurante : restaurantes) {
@@ -87,6 +109,20 @@ public class Menu extends javax.swing.JFrame {
 
         return restaurantesFiltrados;
     }
+    
+    private List<Restaurante> filtrarPorTiempoEnvio(List<Restaurante> restaurantes, boolean filtroTiempoEnvio) {
+        
+        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+
+        for (Restaurante restaurante : restaurantes) {
+            if (restaurante.getTiempoMedioEnvio() == cateringDisponible) {
+                restaurantesFiltrados.add(restaurante);
+            }
+        }
+
+        return restaurantesFiltrados;
+    }
+    
 
     // Método auxiliar para ordenar los restaurantes por relevancia
     private void ordenarPorRelevancia(List<Restaurante> restaurantes) {
@@ -145,6 +181,7 @@ public class Menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         reset = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,12 +225,24 @@ public class Menu extends javax.swing.JFrame {
 
         jButton4.setText("jButton4");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "China", "Sushi", "Mexicana", "Española" }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
 
         reset.setText("resetear filtros");
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -240,7 +289,8 @@ public class Menu extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(55, 55, 55)
-                                        .addComponent(jLabel3)))))
+                                        .addComponent(jLabel3))
+                                    .addComponent(jButton5))))
                         .addGap(100, 100, 100)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -261,12 +311,14 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(reset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -295,14 +347,25 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         catering = true;
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), catering);
+                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), false);
+                Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false); //revisar el filtro especialidad
     }//GEN-LAST:event_resetActionPerformed
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        especialidad = String.valueOf(jComboBox1.getSelectedItem());
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +408,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

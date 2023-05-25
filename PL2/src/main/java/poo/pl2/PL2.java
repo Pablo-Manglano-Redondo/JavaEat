@@ -36,19 +36,19 @@ public class PL2 {
                 "Barcelona", "19198");
         
         Direccion direccionRestaurante2 = new Direccion("Avenida del Sol", "123",
-                "Barcelona", "19188");
+                "Barcelona", "19198");
         
         Restaurante Restaurante1 = new Restaurante("Hola soy el r1", "CIF123", 
-                "Restaurante 1", direccionRestaurante, "Comida Mediterránea", 
+                "Restaurante 1", direccionRestaurante, "Sushi", 
                 5.0, 30, true);
         Restaurante Restaurante2 = new Restaurante("Hola soy el r2", "CIF123", 
-                "Restaurante 2", direccionRestaurante2, "Comida Mediterránea",
+                "Restaurante 2", direccionRestaurante2, "China",
                 10.0, 40, false);
         Restaurante Restaurante3 = new Restaurante("Hola soy el r3", "CIF123", 
-                "Restaurante 3", direccionRestaurante, "Comida Mediterránea", 
+                "Restaurante 3", direccionRestaurante, "Mexicana", 
                 5.0, 50, false);
         Restaurante Restaurante4 = new Restaurante("Hola soy el r4", "CIF123", 
-                "Restaurante 4", direccionRestaurante2, "Comida Mediterránea",
+                "Restaurante 4", direccionRestaurante2, "Española",
                 10.0, 60, false);
         
         Restaurante.restaurantes.add(Restaurante1);
