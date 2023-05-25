@@ -26,6 +26,7 @@ public class Establecimiento extends javax.swing.JFrame {
     double calificacionMedia;
     protected List<Comentario> comentarios = new ArrayList();
     protected static Double precioOpcionesCatering = 0.0;
+    Restaurante restaurante = getRestauranteFromItem();
 
     public Establecimiento() {
 
@@ -504,6 +505,7 @@ public class Establecimiento extends javax.swing.JFrame {
         else {
             calificacionMedia = (calificacionR + calificacionMedia) / 2;
         }
+        restaurante.setCalificacion(calificacionMedia);
     }//GEN-LAST:event_calificacionActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

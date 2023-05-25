@@ -2,6 +2,8 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -28,7 +30,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         scaleImage();
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), especialidad, false, relevancia ,catering);
+                Usuario.listaUsuarios).getDireccion()), especialidad, false, relevancia ,catering, false);
         this.setVisible(true);
         
     }
@@ -45,7 +47,7 @@ public class Menu extends javax.swing.JFrame {
 
     }
 
-    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering) {
+    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering, boolean filtroCalificacion) {
         
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         String primerosDigitos = codigoPostalUsuario.substring(0, 4);
@@ -61,9 +63,12 @@ public class Menu extends javax.swing.JFrame {
         }
         
         else if (filtroTiempoEnvio) {
-            restaurantes = filtrarPorTiempoEnvio(restaurantes, true);
+            restaurantes = ordenarPorTiempoEnvio(restaurantes, true);
         }
 
+        else if (filtroCalificacion) {
+            restaurantes = ordenarPorCalificacion(restaurantes, true);
+        }
 
         for (Restaurante restaurante : restaurantes) {
             String codigoPostalRestaurante = restaurante.getDireccion().getCodigoPostal();
@@ -110,30 +115,39 @@ public class Menu extends javax.swing.JFrame {
         return restaurantesFiltrados;
     }
     
-    private List<Restaurante> filtrarPorTiempoEnvio(List<Restaurante> restaurantes, boolean filtroTiempoEnvio) {
-        
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+    private List<Restaurante> ordenarPorTiempoEnvio(List<Restaurante> restaurantes, boolean filtroTiempoEnvio) {
+        List<Restaurante> restaurantesFiltrados = new ArrayList<>(restaurantes);
 
-        for (Restaurante restaurante : restaurantes) {
-            if (restaurante.getTiempoMedioEnvio() == cateringDisponible) {
-                restaurantesFiltrados.add(restaurante);
-            }
+        if (filtroTiempoEnvio) {
+            // Ordenar los restaurantes por tiempo medio de envío de forma ascendente
+            Collections.sort(restaurantesFiltrados, new Comparator<Restaurante>() {
+                @Override
+                public int compare(Restaurante r1, Restaurante r2) {
+                    return Double.compare(r1.getTiempoMedioEnvio(), r2.getTiempoMedioEnvio());
+                }
+            });
         }
 
         return restaurantesFiltrados;
     }
-    
 
-    // Método auxiliar para ordenar los restaurantes por relevancia
-    private void ordenarPorRelevancia(List<Restaurante> restaurantes) {
-        // Implementa la lógica de ordenación por relevancia según tus criterios
-        // ...
-    }
+    private List<Restaurante> ordenarPorCalificacion(List<Restaurante> restaurantes, boolean filtroCalificacion) {
+        
+        List<Restaurante> restaurantesOrdenados = new ArrayList<>(restaurantes);
 
-    // Método auxiliar para ordenar los restaurantes por tiempo medio de envío
-    private void ordenarPorTiempoMedioEnvio(List<Restaurante> restaurantes) {
-        // Implementa la lógica de ordenación por tiempo medio de envío según tus criterios
-        // ...
+        
+        if (filtroCalificacion) {
+            // Ordenar los restaurantes por calificación media de forma descendente
+            Collections.sort(restaurantesOrdenados, new Comparator<Restaurante>() {
+
+                public int compare(Restaurante r1, Restaurante r2) {
+                    System.out.println(r1.getCalificacion());
+                    System.out.println(r2.getCalificacion());
+                    return Double.compare(r2.getCalificacion(), r1.getCalificacion());
+                }
+            });
+        }
+        return restaurantesOrdenados;
     }
 
 
@@ -222,8 +236,18 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "China", "Sushi", "Mexicana", "Española" }));
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -347,13 +371,13 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         catering = true;
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering);
+                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering, false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false); //revisar el filtro especialidad
+                Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false, false); //revisar el filtro especialidad
     }//GEN-LAST:event_resetActionPerformed
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
@@ -364,8 +388,21 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         especialidad = String.valueOf(jComboBox1.getSelectedItem());
         populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false);
+                Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false, false);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()),especialidad ,false, true,false, false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,false, true);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

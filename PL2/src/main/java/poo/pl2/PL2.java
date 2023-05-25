@@ -49,7 +49,7 @@ public class PL2 {
                 5.0, 50, false);
         Restaurante Restaurante4 = new Restaurante("Hola soy el r4", "CIF123", 
                 "Restaurante 4", direccionRestaurante2, "Española",
-                10.0, 60, false);
+                10.0, 20, false);
         
         Restaurante.restaurantes.add(Restaurante1);
         Restaurante.restaurantes.add(Restaurante2);
