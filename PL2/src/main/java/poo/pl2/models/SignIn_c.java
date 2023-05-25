@@ -1,4 +1,5 @@
-package poo.pl2.controladores;
+package poo.pl2.models;
+
 import org.apache.commons.validator.routines.EmailValidator;
 import poo.pl2.models.Direccion;
 import poo.pl2.models.Serializacion;

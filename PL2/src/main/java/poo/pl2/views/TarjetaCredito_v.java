@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package poo.pl2.views;
 
-import poo.pl2.controladores.SignIn_c;
+import poo.pl2.models.SignIn_c;
 
 /**
  *

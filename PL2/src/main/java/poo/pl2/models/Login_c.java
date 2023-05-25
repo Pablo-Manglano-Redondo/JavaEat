@@ -1,4 +1,4 @@
-package poo.pl2.controladores;
+package poo.pl2.models;
 
 import poo.pl2.views.Login;
 import poo.pl2.models.Usuario;

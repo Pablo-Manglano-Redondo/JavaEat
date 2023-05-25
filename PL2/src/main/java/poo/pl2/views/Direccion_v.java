@@ -4,7 +4,7 @@
  */
 package poo.pl2.views;
 
-import poo.pl2.controladores.SignIn_c;
+import poo.pl2.models.SignIn_c;
 
 /**
  *
@@ -12,9 +12,6 @@ import poo.pl2.controladores.SignIn_c;
  */
 public class Direccion_v extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Direccion_v
-     */
     public Direccion_v(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();

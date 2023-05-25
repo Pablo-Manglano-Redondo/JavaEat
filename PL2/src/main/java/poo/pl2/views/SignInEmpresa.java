@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import poo.pl2.controladores.SignIn_c;
+import poo.pl2.models.SignIn_c;
 
 public class SignInEmpresa extends javax.swing.JDialog {
 

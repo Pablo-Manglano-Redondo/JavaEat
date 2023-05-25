@@ -1,6 +1,6 @@
 package poo.pl2.views;
 
-import poo.pl2.controladores.Login_c;
+import poo.pl2.models.Login_c;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
