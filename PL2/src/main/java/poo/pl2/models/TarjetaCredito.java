@@ -1,6 +1,8 @@
 package poo.pl2.models;
 
-public class TarjetaCredito {
+import java.io.Serializable;
+
+public class TarjetaCredito implements Serializable {
     private String numero;
     private String titular;
     private String fechaExpiracion;

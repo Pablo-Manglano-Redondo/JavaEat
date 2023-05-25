@@ -9,8 +9,7 @@ public class Login_c {
      
     String email = Login.usuario.getText();
     String contraseña = new String(Login.contraseña.getPassword());
-    
-        
+      
     if (email.equals("admin@javaeat.com") && contraseña.equals("admin")) {
         // DAR PERMISOS
         return true;

@@ -2,13 +2,13 @@ package poo.pl2.views;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import poo.pl2.controladores.SignIn_c;
 import poo.pl2.models.Comida;
+import poo.pl2.models.Direccion;
 import poo.pl2.models.Restaurante;
 import poo.pl2.models.Usuario;
 
@@ -96,17 +96,41 @@ public class Cesta extends javax.swing.JDialog {
         precio.setText(gastosEnvio);
     }
     
+    public static String devolverDireccionUsuario(Direccion direccion) {
+        
+        String localidad = direccion.getCiudad();
+        String calle = direccion.getCalle();
+        String numero = direccion.getNumero();
+        String codigoPostal = direccion.getCodigoPostal();
+        
+        return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
+    }
+    
+    public static String devolverDireccionRestaurante(Direccion direccion) {
+        
+        String localidad = direccion.getCiudad();
+        String calle = direccion.getCalle();
+        String numero = direccion.getNumero();
+        String codigoPostal = direccion.getCodigoPostal();
+        
+        return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
+    }
+    
     public static void exportarDatos(String nombreArchivo, String fechaVenta, Restaurante restaurante,
-            List<Comida> comidas, List<Integer> cantidades, Usuario us) {
+            List<Comida> comidas, List<Integer> cantidades, Usuario us){
+            
+        
+            LocalTime horaActual = LocalTime.now(); 
+            // Formatear la hora como una cadena de texto
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaTexto = horaActual.format(formatter); 
+            
+            
         try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
-            // Formatear la fecha de venta
-            //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            //String fechaFormateada = dateFormat.format(fechaVenta);
 
-            // Escribir los datos en el archivo
-            //fileWriter.write("Fecha de Venta: " + fechaFormateada + "\n");
+            fileWriter.write("Fecha de Venta: " + horaTexto + "\n");
             fileWriter.write("Restaurante: " + restaurante.getNombre() + "\n");
-            fileWriter.write("Dirección del Restaurante: " + restaurante.getDireccion() + "\n");
+            fileWriter.write("Dirección del Restaurante: " + devolverDireccionRestaurante(restaurante.getDireccion()) + "\n");
             fileWriter.write("Comidas Compradas:\n");
             for (int i = 0; i < comidas.size(); i++) {
                 Comida comida = comidas.get(i);
@@ -116,7 +140,7 @@ public class Cesta extends javax.swing.JDialog {
             fileWriter.write("\nDatos del Cliente:\n");
             fileWriter.write("Nombre: " + us.getNombre() + "\n");
             fileWriter.write("Correo Electrónico: " + us.getEmail() + "\n");
-            fileWriter.write("Dirección de Envío: " + us.getDireccion() + "\n");
+            fileWriter.write("Dirección de Envío: " + devolverDireccionUsuario(us.getDireccion()) + "\n");
 
             System.out.println("Datos exportados exitosamente al archivo " + nombreArchivo);
         } catch (IOException e) {

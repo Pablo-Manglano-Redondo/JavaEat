@@ -18,11 +18,9 @@ public class SignIn_c {
     String telefono = SignIn.Telefono.getText();
     String nombre = SignIn.Nombre.getText();
     
-    Direccion direccion = new Direccion(Direccion_v.calle.getText(), Direccion_v.numero.getText(), 
-            Direccion_v.localidad.getText(), Direccion_v.codigoPostal.getText());
+    Direccion direccion = registerDireccion();
     
-    TarjetaCredito tarjeta = new TarjetaCredito(TarjetaCredito_v.numeroTarjeta.getText(), 
-     TarjetaCredito_v.titular.getText(), TarjetaCredito_v.fechaNacimiento.getText());
+    TarjetaCredito tarjeta = registerTarjeta();
     
     Usuario us = new Usuario(nombre, email, contraseña, direccion, tarjeta, telefono, dni);
     
@@ -30,6 +28,23 @@ public class SignIn_c {
     
     Usuario.introducirUsuario(us);
     Serializacion.guardarDatosUsuario();
+    }
+    
+    public static Direccion registerDireccion() {
+        
+        Direccion direccion = new Direccion(Direccion_v.calle.getText(), Direccion_v.numero.getText(), 
+            Direccion_v.localidad.getText(), Direccion_v.codigoPostal.getText());
+        
+        return direccion;
+        
+    }
+    
+    public static TarjetaCredito registerTarjeta() {
+        
+        TarjetaCredito tarjeta = new TarjetaCredito(TarjetaCredito_v.numeroTarjeta.getText(), 
+     TarjetaCredito_v.titular.getText(), TarjetaCredito_v.fechaNacimiento.getText());
+        return tarjeta;
+        
     }
     
     public static boolean emailValidator(String email)

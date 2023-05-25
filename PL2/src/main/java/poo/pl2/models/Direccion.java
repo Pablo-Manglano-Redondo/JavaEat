@@ -1,7 +1,9 @@
 package poo.pl2.models;
 
-public class Direccion {
-    
+import java.io.Serializable;
+
+public class Direccion implements Serializable {
+        
     private String calle;
     private String numero;
     private String ciudad;

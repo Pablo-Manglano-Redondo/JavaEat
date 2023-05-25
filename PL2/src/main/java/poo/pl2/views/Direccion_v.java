@@ -4,6 +4,8 @@
  */
 package poo.pl2.views;
 
+import poo.pl2.controladores.SignIn_c;
+
 /**
  *
  * @author pablo
@@ -36,16 +38,16 @@ public class Direccion_v extends javax.swing.JDialog {
         codigoPostal = new javax.swing.JTextField();
         localidad = new javax.swing.JTextField();
         numero = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        calle.setText("jTextField1");
-
-        codigoPostal.setText("jTextField1");
-
-        localidad.setText("jTextField1");
-
-        numero.setText("jTextField1");
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,6 +63,10 @@ public class Direccion_v extends javax.swing.JDialog {
                     .addComponent(localidad, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(numero))
                 .addContainerGap(206, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +75,9 @@ public class Direccion_v extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(calle, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(numero))
-                .addGap(84, 84, 84)
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(codigoPostal)
                     .addComponent(localidad, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -78,6 +86,11 @@ public class Direccion_v extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SignIn_c.registerDireccion();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,6 +137,7 @@ public class Direccion_v extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField calle;
     public static javax.swing.JTextField codigoPostal;
+    private javax.swing.JButton jButton1;
     public static javax.swing.JTextField localidad;
     public static javax.swing.JTextField numero;
     // End of variables declaration//GEN-END:variables

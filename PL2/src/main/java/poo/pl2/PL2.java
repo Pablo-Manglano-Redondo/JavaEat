@@ -5,6 +5,8 @@ import poo.pl2.views.Login;
 import poo.pl2.models.Restaurante;
 import poo.pl2.models.Comida;
 import poo.pl2.models.Serializacion;
+import poo.pl2.models.TarjetaCredito;
+import poo.pl2.models.Usuario;
 
 public class PL2 {
 
@@ -12,6 +14,19 @@ public class PL2 {
         
         Serializacion.cargarDatosUsuario();
         
+        TarjetaCredito tarjetaUsuario = new TarjetaCredito("4817432343", "yo", "04/06/4324");
+            
+        Direccion direccionUsuario = new Direccion("Avenida de la Luna", "12345",
+                "Madrid", "800001");  
+        
+        Usuario usuario1 = new Usuario("pablo", "pablomanglano4235@gmail.com", "pablo", direccionUsuario, tarjetaUsuario, "608 05 96 62", "03492382Q");
+        Usuario usuario2 = new Usuario("pepe", "pepemanglano4235@gmail.com", "pepe", direccionUsuario, tarjetaUsuario, "608 05 96 63", "03492382K");
+        Usuario usuario3 = new Usuario("pedro", "pedromanglano4235@gmail.com", "pedro", direccionUsuario, tarjetaUsuario, "608 05 96 64", "03492382M");
+        
+        Usuario.usuarios.put(usuario1.getEmail(), usuario1);
+        Usuario.usuarios.put(usuario2.getEmail(), usuario2);
+        Usuario.usuarios.put(usuario3.getEmail(), usuario3);
+            
         Direccion direccionRestaurante = new Direccion("Avenida del Sol", "123",
                 "Barcelona", "08001");
         
