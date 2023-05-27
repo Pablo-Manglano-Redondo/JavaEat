@@ -2,19 +2,13 @@ package poo.pl2.views;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JList;
 import poo.pl2.models.Comentario;
 import poo.pl2.models.Comida;
+import poo.pl2.models.Establecimiento_c;
 import poo.pl2.models.Restaurante;
 
 /**
@@ -24,9 +18,9 @@ import poo.pl2.models.Restaurante;
 public class Establecimiento extends javax.swing.JFrame {
     
     double calificacionMedia;
-    protected List<Comentario> comentarios = new ArrayList();
-    protected static Double precioOpcionesCatering = 0.0;
-    Restaurante restaurante = getRestauranteFromItem();
+    public static List<Comentario> comentarios = new ArrayList();
+    public static Double precioOpcionesCatering = 0.0;
+    Restaurante restaurante = Establecimiento_c.getRestauranteFromItem();
 
     public Establecimiento() {
 
@@ -41,12 +35,12 @@ public class Establecimiento extends javax.swing.JFrame {
         
         scaleImage();
         scaleImageRestaurante();
-        populateItemBox(this.jList2, Restaurante.comidas);
+        Establecimiento_c.populateItemBox(this.jList2, Restaurante.comidas);
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
         //cargarDatosComentario(); FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
         changeFont();
-        cargarCatering();
+        Establecimiento_c.cargarCatering();
         this.setVisible(true);
     }
     
@@ -75,130 +69,6 @@ public class Establecimiento extends javax.swing.JFrame {
         nombreRestaurante.setFont(new Font("Georgia", Font.PLAIN, 24));
     }
     
-    public void cargarCatering() {
-        
-        if (getRestauranteFromItem().isCateringParaEmpresas()) {
-            
-            System.out.println("es visible");
-            
-        }
-        else {
-            
-            catering.setVisible(false);
-            
-        }
-        
-    }
-    
-    public static Double precioCatering() {
-        
-        System.out.println(precioOpcionesCatering);
-        return precioOpcionesCatering;
-        
-    }
-    
-    public void guardarDatosComentario() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("copiaSegComentarios.dat");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(comentarios);
-            out.close();
-            fileOut.close();
-            System.out.println("Los comentarios se han guardado correctamente.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void cargarDatosComentario() {
-        try {
-            FileInputStream fileIn = new FileInputStream("copiaSegComentarios.dat");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            comentarios = (List<Comentario>) in.readObject();
-            in.close();
-            fileIn.close();
-            System.out.println("Los comentarios se han cargado correctamente.");
-        } catch (IOException | ClassNotFoundException e) {
-            // Manejar el caso en que el archivo esté vacío
-            System.out.println("tester 1");
-            comentarios = new ArrayList<>();
-            System.out.println("No se encontraron comentarios existentes.");
-        }
-    }
-
-    public void agregarComentario(Comentario comentario) {
-        if (comentarios == null) {
-            System.out.println("El objeto 'comentarios' es nulo.");
-        }
-        else {
-            comentarios.add(comentario); 
-            System.out.println("Se ha agregado un nuevo comentario.");
-            mostrarComentario();
-        }
-    }
-
-    
-   public void mostrarComentario() {
-    if (comentarios != null) {
-        StringBuilder sb = new StringBuilder();
-        for (Comentario comentario : comentarios) {
-            sb.append("Autor: ").append(comentario.getAutor()).append("\n");
-            sb.append("Fecha: ").append(comentario.getFecha()).append("\n");
-            sb.append("Contenido: ").append(comentario.getContenido()).append("\n");
-            sb.append("Calificación: ").append(comentario.getCalificacion()).append("\n");
-            sb.append("----------------------\n");
-        }
-        jTextArea1.setText(sb.toString());
-    } else {
-        jTextArea1.setText("No hay comentarios disponibles.");
-        }
-    }
-
-    
-    
-    public Comida getComidaFromItem() {
-    
-        List<Comida> comidas = Restaurante.comidas;
-        // Desde un array con todos los restaurantes...
-        // TODO: Revisar Java Streams!!!
-        return comidas.stream().filter((elem) -> {
-        
-            return elem.getNombre().equals(jList2.getSelectedValue());
-            
-        }).findAny().get();
-        
-    }
-
-    private void populateItemBox(JList jl, List<Comida> comidas) {
-    
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
-        for(Comida comida : comidas) {
-        
-            if (comida.getRestaurante().equals(getRestauranteFromItem())) {
-            model.addElement(comida.getNombre());
-        }
-            
-        }
-        
-        jl.setModel(model);
-    
-    }
-    
-    public Restaurante getRestauranteFromItem() {
-    
-        List<Restaurante> restaurantes = Restaurante.restaurantes;
-        // Desde un array con todos los restaurantes...
-        // TODO: Revisar Java Streams!!!
-        return restaurantes.stream().filter((elem) -> {
-        
-            return elem.getNombre().equals(Menu.jList1.getSelectedValue());
-            
-        }).findAny().get();
-        
-    }
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -467,23 +337,23 @@ public class Establecimiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        getRestauranteFromItem().setCalificacion(calificacionMedia);
+        Establecimiento_c.getRestauranteFromItem().setCalificacion(calificacionMedia);
         valorCalificacion.setText(String.valueOf(calificacionMedia));
         
         LocalTime horaActual = LocalTime.now();
         
         Comentario comentario = new Comentario(jTextField1.getText(), Login.usuario.getText(),
                 horaActual.toString(), calificacion.getSelectedIndex() + 1);
-        agregarComentario(comentario);
+        Establecimiento_c.agregarComentario(comentario);
         
-        guardarDatosComentario();
+        Establecimiento_c.guardarDatosComentario();
             
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         // TODO add your handling code here:
         
-        Comida comidaSeleccionada = getComidaFromItem();
+        Comida comidaSeleccionada = Establecimiento_c.getComidaFromItem();
         Plato platoo = new Plato(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
         
     }//GEN-LAST:event_jList2MouseClicked
@@ -512,10 +382,10 @@ public class Establecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jCheckBox1.isSelected()) {
             precioOpcionesCatering += 800;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         } else {
            precioOpcionesCatering -= 800;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         }
         
     }//GEN-LAST:event_jCheckBox1ActionPerformed
@@ -524,10 +394,10 @@ public class Establecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jCheckBox3.isSelected()) {
             precioOpcionesCatering += 500;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         } else {
            precioOpcionesCatering -= 500;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         }
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
@@ -535,10 +405,10 @@ public class Establecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jCheckBox2.isSelected()) {
             precioOpcionesCatering += 1000;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         } else {
            precioOpcionesCatering -= 1000;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
@@ -547,10 +417,10 @@ public class Establecimiento extends javax.swing.JFrame {
         
         if (jCheckBox4.isSelected()) {
             precioOpcionesCatering += 1000;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         } else {
            precioOpcionesCatering -= 1000;
-            precioCatering();
+            Establecimiento_c.precioCatering();
         }
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
@@ -591,8 +461,8 @@ public class Establecimiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
-    private javax.swing.JComboBox<Integer> calificacion;
-    private javax.swing.JPanel catering;
+    public static javax.swing.JComboBox<Integer> calificacion;
+    public static javax.swing.JPanel catering;
     private javax.swing.JLabel descripcionRestaurante;
     private javax.swing.JLabel imagenRestaurante;
     private javax.swing.JButton jButton1;
@@ -608,9 +478,9 @@ public class Establecimiento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTextField jTextField1;
     private javax.swing.JLabel nombreRestaurante;
-    private javax.swing.JLabel valorCalificacion;
+    public static javax.swing.JLabel valorCalificacion;
     // End of variables declaration//GEN-END:variables
 }

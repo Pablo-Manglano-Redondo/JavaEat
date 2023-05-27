@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import poo.pl2.models.Cesta_c;
+import poo.pl2.models.Menu_c;
 import poo.pl2.models.Restaurante;
 import poo.pl2.models.Usuario;
 
@@ -29,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
         
         initComponents();
         scaleImage();
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()), especialidad, false, relevancia ,catering, false);
         this.setVisible(true);
         
@@ -47,132 +49,7 @@ public class Menu extends javax.swing.JFrame {
 
     }
 
-    private void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering, boolean filtroCalificacion) {
-        
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        String primerosDigitos = codigoPostalUsuario.substring(0, 4);
-        boolean restauranteEncontrado = false;
-
-        // Aplicar filtro de servicio de catering
-        if (especialidadBool) {
-            restaurantes = filtrarPorEspecialidad(restaurantes, especialidad);
-        }
-        
-        else if (filtroCatering) {
-            restaurantes = filtrarPorCatering(restaurantes, true);
-        }
-        
-        else if (filtroTiempoEnvio) {
-            restaurantes = ordenarPorTiempoEnvio(restaurantes, true);
-        }
-
-        else if (filtroCalificacion) {
-            restaurantes = ordenarPorCalificacion(restaurantes, true);
-        }
-
-        for (Restaurante restaurante : restaurantes) {
-            String codigoPostalRestaurante = restaurante.getDireccion().getCodigoPostal();
-            if (codigoPostalRestaurante.startsWith(primerosDigitos)) {
-                model.addElement(restaurante.getNombre());
-                restauranteEncontrado = true;
-            }
-        }
-
-        if (!restauranteEncontrado) {
-            model.addElement("Ningún restaurante en la zona");
-        }
-
-        jl.setModel(model);
-    }
-
-    private List<Restaurante> filtrarPorEspecialidad(List<Restaurante> restaurantes, String especialidad) {
-
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
-
-
-        for (Restaurante restaurante : restaurantes) {
-            if (restaurante.getEspecialidad().equals(especialidad)) {
-                System.out.println("coinciden");
-                restaurantesFiltrados.add(restaurante);
-            }
-        }
-
-        return restaurantesFiltrados;
-
-    }
     
-
-    private List<Restaurante> filtrarPorCatering(List<Restaurante> restaurantes, boolean cateringDisponible) {
-        
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
-
-        for (Restaurante restaurante : restaurantes) {
-            if (restaurante.isCateringParaEmpresas() == cateringDisponible) {
-                restaurantesFiltrados.add(restaurante);
-            }
-        }
-
-        return restaurantesFiltrados;
-    }
-    
-    private List<Restaurante> ordenarPorTiempoEnvio(List<Restaurante> restaurantes, boolean filtroTiempoEnvio) {
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>(restaurantes);
-
-        if (filtroTiempoEnvio) {
-            // Ordenar los restaurantes por tiempo medio de envío de forma ascendente
-            Collections.sort(restaurantesFiltrados, new Comparator<Restaurante>() {
-                @Override
-                public int compare(Restaurante r1, Restaurante r2) {
-                    return Double.compare(r1.getTiempoMedioEnvio(), r2.getTiempoMedioEnvio());
-                }
-            });
-        }
-
-        return restaurantesFiltrados;
-    }
-
-    private List<Restaurante> ordenarPorCalificacion(List<Restaurante> restaurantes, boolean filtroCalificacion) {
-        
-        List<Restaurante> restaurantesOrdenados = new ArrayList<>(restaurantes);
-
-        
-        if (filtroCalificacion) {
-            // Ordenar los restaurantes por calificación media de forma descendente
-            Collections.sort(restaurantesOrdenados, new Comparator<Restaurante>() {
-
-                public int compare(Restaurante r1, Restaurante r2) {
-                    System.out.println(r1.getCalificacion());
-                    System.out.println(r2.getCalificacion());
-                    return Double.compare(r2.getCalificacion(), r1.getCalificacion());
-                }
-            });
-        }
-        return restaurantesOrdenados;
-    }
-
-
-    
-    public String obtenerDescripcion(Restaurante restaurante) {
-        
-        String returnVal = "Not found";
-        if (jList1.getSelectedValue().equals(restaurante.getNombre())) {
-            returnVal = restaurante.getDescripcion();
-        }
-        return returnVal;
-    }
-    
-    public Restaurante getRestauranteFromItem() {
-    
-        List<Restaurante> restaurantes = Restaurante.restaurantes;
-        // Desde un array con todos los restaurantes...
-        // TODO: Revisar Java Streams!!!
-        return restaurantes.stream().filter((elem) -> {
-        
-            return elem.getNombre().equals(jList1.getSelectedValue());
-            
-        }).findAny().get();
-        
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -359,7 +236,7 @@ public class Menu extends javax.swing.JFrame {
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
         Establecimiento establecimiento = new Establecimiento(jList1.getSelectedValue(),
-                getRestauranteFromItem().getDescripcion());
+                Menu_c.getRestauranteFromItem().getDescripcion());
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -370,13 +247,13 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         catering = true;
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering, false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false, false); //revisar el filtro especialidad
     }//GEN-LAST:event_resetActionPerformed
 
@@ -387,19 +264,19 @@ public class Menu extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         especialidad = String.valueOf(jComboBox1.getSelectedItem());
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false, false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()),especialidad ,false, true,false, false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        populateItemBox(this.jList1, Restaurante.restaurantes, Cesta.devolverCodigoPostalUsuario(Cesta.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_c.populateItemBox(this.jList1, Restaurante.restaurantes, Cesta_c.devolverCodigoPostalUsuario(Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,false, true);
         
     }//GEN-LAST:event_jButton4ActionPerformed

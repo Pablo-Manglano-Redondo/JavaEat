@@ -2,10 +2,9 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.ImageIcon;
 import poo.pl2.models.Comida;
-import poo.pl2.models.Restaurante;
+import poo.pl2.models.Plato_c;
 
 /**
  *
@@ -53,19 +52,6 @@ public class Plato extends javax.swing.JDialog {
         Imagen.setText("");
         Imagen.setIcon(scaledIcon);
 
-    }
-    
-    public Comida getComidaFromItem() {
-    
-        List<Comida> comidas = Restaurante.comidas;
-        // Desde un array con todos los restaurantes...
-        // TODO: Revisar Java Streams!!!
-        return comidas.stream().filter((elem) -> {
-        
-            return elem.getNombre().equals(Establecimiento.jList2.getSelectedValue());
-            
-        }).findAny().get();
-        
     }
    
     
@@ -178,7 +164,7 @@ public class Plato extends javax.swing.JDialog {
 
     private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed
         // TODO add your handling code here:
-        Comida value = getComidaFromItem();
+        Comida value = Plato_c.getComidaFromItem();
         Comida.carritos.add(value);
         cantidades.add(Plato.cantidad.getSelectedIndex() + 1);
     }//GEN-LAST:event_pedidoActionPerformed

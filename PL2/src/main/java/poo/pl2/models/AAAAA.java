@@ -12,8 +12,6 @@ public class AAAAA {
     
     cargarDatosComentario introduce el fallo
     
-    serializacion ventas no funciona
-    
     arreglar sign in de empresas, hacer que tenga sentido o fusionarlo con el de particulares
     
     migrar cesta, establecimiento y plato,
