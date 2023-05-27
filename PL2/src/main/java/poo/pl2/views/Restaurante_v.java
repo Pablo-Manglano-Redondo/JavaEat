@@ -9,26 +9,22 @@ import javax.swing.ImageIcon;
 import poo.pl2.models.Comentario;
 import poo.pl2.models.Comida_m;
 import poo.pl2.models.Restaurante_m;
+import static poo.pl2.views.Establecimiento.precioOpcionesCatering;
 
-/**
- *
- * @author pablo
- */
-public class Establecimiento extends javax.swing.JFrame {
-    
+public class Restaurante_v extends javax.swing.JFrame {
+
     double calificacionMedia;
     public static List<Comentario> comentarios = new ArrayList();
     public static Double precioOpcionesCatering = 0.0;
     Restaurante_m restaurante = Restaurante_m.getRestauranteFromItem();
-
-    public Establecimiento() {
-
+    
+    public Restaurante_v() {
         initComponents();
         scaleImage();
         scaleImageRestaurante();
     }
-    
-    public Establecimiento(String nombre, String descripcion) {
+
+    public Restaurante_v(String nombre, String descripcion) {
 
         initComponents();
         
@@ -300,7 +296,7 @@ public class Establecimiento extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(valorCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,6 +326,14 @@ public class Establecimiento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        // TODO add your handling code here:
+
+        Comida_m comidaSeleccionada = Restaurante_m.getComidaFromItem();
+        Plato platoo = new Plato(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
+
+    }//GEN-LAST:event_jList2MouseClicked
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -338,24 +342,16 @@ public class Establecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         Restaurante_m.getRestauranteFromItem().setCalificacion(calificacionMedia);
         valorCalificacion.setText(String.valueOf(calificacionMedia));
-        
-        LocalTime horaActual = LocalTime.now();
-        
-        Comentario comentario = new Comentario(jTextField1.getText(), Login.usuario.getText(),
-                horaActual.toString(), calificacion.getSelectedIndex() + 1);
-        Restaurante_m.agregarComentario(comentario);
-        
-        Restaurante_m.guardarDatosComentario();
-            
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        // TODO add your handling code here:
-        
-        Comida_m comidaSeleccionada = Restaurante_m.getComidaFromItem();
-        Plato platoo = new Plato(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
-        
-    }//GEN-LAST:event_jList2MouseClicked
+        LocalTime horaActual = LocalTime.now();
+
+        Comentario comentario = new Comentario(jTextField1.getText(), Login.usuario.getText(),
+            horaActual.toString(), calificacion.getSelectedIndex() + 1);
+        Restaurante_m.agregarComentario(comentario);
+
+        Restaurante_m.guardarDatosComentario();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -365,10 +361,10 @@ public class Establecimiento extends javax.swing.JFrame {
     private void calificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calificacionActionPerformed
         // TODO add your handling code here:
         //obtener calificacion
-        
+
         int calificacionR = calificacion.getSelectedIndex() + 1;
         if (calificacionMedia == 0) {
-            
+
             calificacionMedia = calificacionR;
         }
         else {
@@ -383,22 +379,11 @@ public class Establecimiento extends javax.swing.JFrame {
             precioOpcionesCatering += 800;
             Restaurante_m.precioCatering();
         } else {
-           precioOpcionesCatering -= 800;
+            precioOpcionesCatering -= 800;
             Restaurante_m.precioCatering();
         }
-        
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-        if (jCheckBox3.isSelected()) {
-            precioOpcionesCatering += 500;
-            Restaurante_m.precioCatering();
-        } else {
-           precioOpcionesCatering -= 500;
-            Restaurante_m.precioCatering();
-        }
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
@@ -406,19 +391,30 @@ public class Establecimiento extends javax.swing.JFrame {
             precioOpcionesCatering += 1000;
             Restaurante_m.precioCatering();
         } else {
-           precioOpcionesCatering -= 1000;
+            precioOpcionesCatering -= 1000;
             Restaurante_m.precioCatering();
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBox3.isSelected()) {
+            precioOpcionesCatering += 500;
+            Restaurante_m.precioCatering();
+        } else {
+            precioOpcionesCatering -= 500;
+            Restaurante_m.precioCatering();
+        }
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
         // TODO add your handling code here:
-        
+
         if (jCheckBox4.isSelected()) {
             precioOpcionesCatering += 1000;
             Restaurante_m.precioCatering();
         } else {
-           precioOpcionesCatering -= 1000;
+            precioOpcionesCatering -= 1000;
             Restaurante_m.precioCatering();
         }
     }//GEN-LAST:event_jCheckBox4ActionPerformed
@@ -440,20 +436,20 @@ public class Establecimiento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Establecimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Restaurante_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Establecimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Restaurante_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Establecimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Restaurante_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Establecimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Restaurante_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Establecimiento().setVisible(true);
+                new Restaurante_v().setVisible(true);
             }
         });
     }

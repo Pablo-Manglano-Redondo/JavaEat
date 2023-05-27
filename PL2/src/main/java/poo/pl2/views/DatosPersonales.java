@@ -2,7 +2,7 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import poo.pl2.models.Cesta_c;
+import poo.pl2.models.Cesta_m;
 import poo.pl2.models.Usuario;
 
 public class DatosPersonales extends javax.swing.JDialog {
@@ -40,7 +40,7 @@ public class DatosPersonales extends javax.swing.JDialog {
         
         char[] passwordChars = Login.contraseña.getPassword();
         String contraseña = String.valueOf(passwordChars);
-        Usuario user = Cesta_c.buscarUsuario(Login.usuario.getText(), contraseña, Usuario.listaUsuarios);
+        Usuario user = Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña, Usuario.listaUsuarios);
         Correo.setText(user.getEmail());
         Password.setText(contraseña);
         DNI.setText(user.getDni());

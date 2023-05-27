@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import poo.pl2.models.SignIn_c;
+import poo.pl2.models.SignIn_m;
 import poo.pl2.models.Usuario;
 
 
@@ -165,7 +165,7 @@ public class SignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_CorreoActionPerformed
 
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
-        SignIn_c.registerUser();
+        SignIn_m.registerUser();
     }//GEN-LAST:event_SubmitMouseClicked
 
     private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
@@ -186,11 +186,11 @@ public class SignIn extends javax.swing.JDialog {
             // Al menos una casilla de texto está vacía
             JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
         }
-        else if (SignIn_c.emailValidator(Correo.getText()) ) {
+        else if (SignIn_m.emailValidator(Correo.getText()) ) {
             // PONER AQUI LAS EXCEPCIONES
 
             
-            SignIn_c.registerUser();
+            SignIn_m.registerUser();
             JOptionPane.showMessageDialog(this, "Usuario registrado con éxito");
             this.setVisible(false);
         }

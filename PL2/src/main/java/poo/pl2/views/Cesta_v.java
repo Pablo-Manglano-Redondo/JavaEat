@@ -3,32 +3,28 @@ package poo.pl2.views;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import poo.pl2.models.Cesta_c;
-import poo.pl2.models.Comida;
-import poo.pl2.models.Establecimiento_c;
+import poo.pl2.models.Cesta_m;
+import poo.pl2.models.Comida_m;
+import poo.pl2.models.Restaurante_m;
 import poo.pl2.models.Usuario;
 
-/**
- *
- * @author pablo
- */
-public class Cesta extends javax.swing.JDialog implements Serializable {
+public class Cesta_v extends javax.swing.JDialog implements Serializable{
 
     public static double total;
     public static double gastosE;
     public static List<String> ventaData = new ArrayList<>();
     
-    public Cesta(java.awt.Frame parent, boolean modal) {
+    public Cesta_v(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Cesta_c.calcularCarrito(Comida.carritos);
-        Cesta_c.calcularGastosEnvio(Cesta_c.getRestauranteFromItem());
-        Cesta_c.calcularPrecioFinal();
-        Cesta_c.populateCart(carro);
-        Establecimiento_c.precioCatering();
+        Cesta_m.calcularCarrito(Comida_m.carritos);
+        Cesta_m.calcularGastosEnvio(Cesta_m.getRestauranteFromItem());
+        Cesta_m.calcularPrecioFinal();
+        Cesta_m.populateCart(carro);
+        Restaurante_m.precioCatering();
         this.setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,12 +77,12 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
+                        .addGap(147, 147, 147)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -104,7 +100,7 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
                             .addComponent(jLabel1))
                         .addGap(248, 248, 248)
                         .addComponent(jButton2)))
-                .addGap(260, 260, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +114,7 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(precioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,7 +122,7 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(envio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,22 +130,21 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         char[] passwordChars = Login.contraseña.getPassword();
         String contraseña = String.valueOf(passwordChars);
 
-        Cesta_c.exportarDatos("venta.txt", Cesta_c.getRestauranteFromItem(),
-                Comida.carritos,
-                
-                Plato.cantidades , Cesta_c.buscarUsuario(Login.usuario.getText(),
-                        contraseña, Usuario.listaUsuarios));
-        
-        //Almacenar datos
-        Cesta_c.exportarVenta(Cesta_c.getRestauranteFromItem(), Comida.carritos, Plato.cantidades, Cesta_c.buscarUsuario(Login.usuario.getText(),
-                        contraseña, Usuario.listaUsuarios));
-        
-        Cesta_c.serializarVentaData(ventaData, "CopiaSegVentas.dat");
+        Cesta_m.exportarDatos("venta.txt", Cesta_m.getRestauranteFromItem(),
+            Comida_m.carritos,
 
+            Plato.cantidades , Cesta_m.buscarUsuario(Login.usuario.getText(),
+                contraseña, Usuario.listaUsuarios));
+
+        //Almacenar datos
+        Cesta_m.exportarVenta(Cesta_m.getRestauranteFromItem(), Comida_m.carritos, Plato.cantidades, Cesta_m.buscarUsuario(Login.usuario.getText(),
+            contraseña, Usuario.listaUsuarios));
+
+    Cesta_m.serializarVentaData(ventaData, "CopiaSegVentas.dat");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -169,21 +164,20 @@ public class Cesta extends javax.swing.JDialog implements Serializable {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cesta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cesta_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cesta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cesta_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cesta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cesta_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cesta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cesta_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
-                Cesta dialog = new Cesta(new javax.swing.JFrame(), true);
+                Cesta_v dialog = new Cesta_v(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

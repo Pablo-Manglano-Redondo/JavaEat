@@ -3,7 +3,7 @@ package poo.pl2.models;
 import poo.pl2.views.Login;
 import poo.pl2.models.Usuario;
 
-public class Login_c {
+public class Login_m {
     
     public static boolean checkAdmin() {
      

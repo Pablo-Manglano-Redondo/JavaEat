@@ -4,7 +4,7 @@
  */
 package poo.pl2.views;
 
-import poo.pl2.models.SignIn_c;
+import poo.pl2.models.SignIn_m;
 
 /**
  *
@@ -86,7 +86,7 @@ public class Direccion_v extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SignIn_c.registerDireccion();
+        SignIn_m.registerDireccion();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

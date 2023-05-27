@@ -3,8 +3,7 @@ package poo.pl2.views;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import poo.pl2.models.Comida;
-import poo.pl2.models.Plato_c;
+import poo.pl2.models.Comida_m;
 
 /**
  *
@@ -164,8 +163,8 @@ public class Plato extends javax.swing.JDialog {
 
     private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed
         // TODO add your handling code here:
-        Comida value = Plato_c.getComidaFromItem();
-        Comida.carritos.add(value);
+        Comida_m value = Comida_m.getComidaFromItem();
+        Comida_m.carritos.add(value);
         cantidades.add(Plato.cantidad.getSelectedIndex() + 1);
     }//GEN-LAST:event_pedidoActionPerformed
 

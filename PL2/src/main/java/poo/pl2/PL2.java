@@ -2,8 +2,8 @@ package poo.pl2;
 
 import poo.pl2.models.Direccion;
 import poo.pl2.views.Login;
-import poo.pl2.models.Restaurante;
-import poo.pl2.models.Comida;
+import poo.pl2.models.Restaurante_m;
+import poo.pl2.models.Comida_m;
 import poo.pl2.models.Serializacion;
 import poo.pl2.models.TarjetaCredito;
 import poo.pl2.models.Usuario;
@@ -38,54 +38,54 @@ public class PL2 {
         Direccion direccionRestaurante2 = new Direccion("Avenida del Sol", "123",
                 "Barcelona", "19198");
         
-        Restaurante Restaurante1 = new Restaurante("Hola soy el r1", "CIF123", 
+        Restaurante_m Restaurante1 = new Restaurante_m("Hola soy el r1", "CIF123", 
                 "Restaurante 1", direccionRestaurante, "Sushi", 
                 5.0, 30, true);
-        Restaurante Restaurante2 = new Restaurante("Hola soy el r2", "CIF123", 
+        Restaurante_m Restaurante2 = new Restaurante_m("Hola soy el r2", "CIF123", 
                 "Restaurante 2", direccionRestaurante2, "China",
                 10.0, 40, false);
-        Restaurante Restaurante3 = new Restaurante("Hola soy el r3", "CIF123", 
+        Restaurante_m Restaurante3 = new Restaurante_m("Hola soy el r3", "CIF123", 
                 "Restaurante 3", direccionRestaurante, "Mexicana", 
                 5.0, 50, false);
-        Restaurante Restaurante4 = new Restaurante("Hola soy el r4", "CIF123", 
+        Restaurante_m Restaurante4 = new Restaurante_m("Hola soy el r4", "CIF123", 
                 "Restaurante 4", direccionRestaurante2, "Española",
                 10.0, 20, false);
         
-        Restaurante.restaurantes.add(Restaurante1);
-        Restaurante.restaurantes.add(Restaurante2);
-        Restaurante.restaurantes.add(Restaurante3);
-        Restaurante.restaurantes.add(Restaurante4);
+        Restaurante_m.restaurantes.add(Restaurante1);
+        Restaurante_m.restaurantes.add(Restaurante2);
+        Restaurante_m.restaurantes.add(Restaurante3);
+        Restaurante_m.restaurantes.add(Restaurante4);
         
-        Comida comida1 = new Comida("comida1", "1", 1.0, "tiene gluten 1", Restaurante1);
-        Comida comida2 = new Comida("comida2", "2", 2.0, "tiene gluten 2", Restaurante1);
-        Comida comida3 = new Comida("comida3", "3", 3.0, "tiene gluten 3", Restaurante1);
+        Comida_m comida1 = new Comida_m("comida1", "1", 1.0, "tiene gluten 1", Restaurante1);
+        Comida_m comida2 = new Comida_m("comida2", "2", 2.0, "tiene gluten 2", Restaurante1);
+        Comida_m comida3 = new Comida_m("comida3", "3", 3.0, "tiene gluten 3", Restaurante1);
 
         
-        Comida comida4 = new Comida("comida4", "1", 1.0, "tiene gluten 1", Restaurante2);
-        Comida comida5 = new Comida("comida5", "2", 2.0, "tiene gluten 2", Restaurante2);
-        Comida comida6 = new Comida("comida6", "3", 3.0, "tiene gluten 3", Restaurante2);
+        Comida_m comida4 = new Comida_m("comida4", "1", 1.0, "tiene gluten 1", Restaurante2);
+        Comida_m comida5 = new Comida_m("comida5", "2", 2.0, "tiene gluten 2", Restaurante2);
+        Comida_m comida6 = new Comida_m("comida6", "3", 3.0, "tiene gluten 3", Restaurante2);
 
-        Comida comida7 = new Comida("comida7", "1", 1.0, "tiene gluten 1", Restaurante3);
-        Comida comida8 = new Comida("comida8", "2", 2.0, "tiene gluten 2", Restaurante3);
-        Comida comida9 = new Comida("comida9", "3", 3.0, "tiene gluten 3", Restaurante3);
+        Comida_m comida7 = new Comida_m("comida7", "1", 1.0, "tiene gluten 1", Restaurante3);
+        Comida_m comida8 = new Comida_m("comida8", "2", 2.0, "tiene gluten 2", Restaurante3);
+        Comida_m comida9 = new Comida_m("comida9", "3", 3.0, "tiene gluten 3", Restaurante3);
 
-        Comida comida10 = new Comida("comida10", "1", 1.0, "tiene gluten 1", Restaurante4);
-        Comida comida11 = new Comida("comida11", "2", 2.0, "tiene gluten 2", Restaurante4);
-        Comida comida12 = new Comida("comida12", "3", 3.0, "tiene gluten 3", Restaurante4);
+        Comida_m comida10 = new Comida_m("comida10", "1", 1.0, "tiene gluten 1", Restaurante4);
+        Comida_m comida11 = new Comida_m("comida11", "2", 2.0, "tiene gluten 2", Restaurante4);
+        Comida_m comida12 = new Comida_m("comida12", "3", 3.0, "tiene gluten 3", Restaurante4);
         
 
-        Restaurante.comidas.add(comida1);
-        Restaurante.comidas.add(comida2);
-        Restaurante.comidas.add(comida3);
-        Restaurante.comidas.add(comida4);
-        Restaurante.comidas.add(comida5);
-        Restaurante.comidas.add(comida6);
-        Restaurante.comidas.add(comida7);
-        Restaurante.comidas.add(comida8);
-        Restaurante.comidas.add(comida9);
-        Restaurante.comidas.add(comida10);
-        Restaurante.comidas.add(comida11);
-        Restaurante.comidas.add(comida12);
+        Restaurante_m.comidas.add(comida1);
+        Restaurante_m.comidas.add(comida2);
+        Restaurante_m.comidas.add(comida3);
+        Restaurante_m.comidas.add(comida4);
+        Restaurante_m.comidas.add(comida5);
+        Restaurante_m.comidas.add(comida6);
+        Restaurante_m.comidas.add(comida7);
+        Restaurante_m.comidas.add(comida8);
+        Restaurante_m.comidas.add(comida9);
+        Restaurante_m.comidas.add(comida10);
+        Restaurante_m.comidas.add(comida11);
+        Restaurante_m.comidas.add(comida12);
         
      
         Login f = new Login();

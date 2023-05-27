@@ -5,10 +5,10 @@ public class Pedido {
 
     private int id;
     private Usuario usuario;
-    private List<Comida> comidas;
+    private List<Comida_m> comidas;
     private boolean entregado;
 
-    public Pedido(int id, Usuario usuario, List<Comida> comidas) {
+    public Pedido(int id, Usuario usuario, List<Comida_m> comidas) {
         this.id = id;
         this.usuario = usuario;
         this.comidas = comidas;
@@ -23,7 +23,7 @@ public class Pedido {
         return usuario;
     }
 
-    public List<Comida> getComidas() {
+    public List<Comida_m> getComidas() {
         return comidas;
     }
 
@@ -37,7 +37,7 @@ public class Pedido {
 
     public float calcularTotal() {
         float total = 0;
-        for (Comida comida : comidas) {
+        for (Comida_m comida : comidas) {
             total += comida.getPrecio();
         }
         return total;

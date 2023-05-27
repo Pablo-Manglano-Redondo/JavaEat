@@ -9,7 +9,7 @@ import poo.pl2.views.Direccion_v;
 import poo.pl2.views.SignIn;
 import poo.pl2.views.TarjetaCredito_v;
 
-public class SignIn_c {
+public class SignIn_m {
     
     public static void registerUser() {
         

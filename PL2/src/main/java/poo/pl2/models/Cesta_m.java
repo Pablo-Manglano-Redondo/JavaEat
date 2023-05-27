@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import poo.pl2.views.Cesta;
-import static poo.pl2.views.Cesta.gastosE;
-import static poo.pl2.views.Cesta.precio;
-import static poo.pl2.views.Cesta.total;
+import poo.pl2.views.Cesta_v;
+import static poo.pl2.views.Cesta_v.gastosE;
+import static poo.pl2.views.Cesta_v.precio;
+import static poo.pl2.views.Cesta_v.total;
 import poo.pl2.views.Establecimiento;
 import poo.pl2.views.Menu;
 import poo.pl2.views.Plato;
@@ -24,14 +24,14 @@ import poo.pl2.views.Plato;
  *
  * @author pablo
  */
-public class Cesta_c {
+public class Cesta_m {
     
     public static void populateCart(JList<String> carro) {
         DefaultListModel<String> detalles = new DefaultListModel<>();
         int i = 0;
         int j = 0;
-        for (Comida comida : Comida.carritos) {
-            Comida selectedComida = Comida.carritos.get(i++);
+        for (Comida_m comida : Comida_m.carritos) {
+            Comida_m selectedComida = Comida_m.carritos.get(i++);
 
             if (selectedComida != null) {
                 String details = "Nombre: " + selectedComida.getNombre() +
@@ -73,9 +73,9 @@ public class Cesta_c {
         return ventaData;
     }
     
-    public static Restaurante getRestauranteFromItem() {
+    public static Restaurante_m getRestauranteFromItem() {
     
-        List<Restaurante> restaurantes = Restaurante.restaurantes;
+        List<Restaurante_m> restaurantes = Restaurante_m.restaurantes;
         // Desde un array con todos los restaurantes...
         // TODO: Revisar Java Streams!!!
         return restaurantes.stream().filter((elem) -> {
@@ -86,22 +86,22 @@ public class Cesta_c {
         
     }
     
-    public static void calcularCarrito(List<Comida> carritos) {
+    public static void calcularCarrito(List<Comida_m> carritos) {
     
-    for (Comida carrito : carritos) {
-        Comida alimento = carrito;
-        Cesta.total += alimento.getPrecio() * (Plato.cantidad.getSelectedIndex() + 1);
+    for (Comida_m carrito : carritos) {
+        Comida_m alimento = carrito;
+        Cesta_v.total += alimento.getPrecio() * (Plato.cantidad.getSelectedIndex() + 1);
     }
 
-    Cesta.numero.setText(String.valueOf(Cesta.total));
+    Cesta_v.numero.setText(String.valueOf(Cesta_v.total));
     
     }
     
-    public static void calcularGastosEnvio(Restaurante restaurante) {
+    public static void calcularGastosEnvio(Restaurante_m restaurante) {
         
         gastosE = restaurante.getGastosEnvio();
         String gastosEnvio = String.valueOf(restaurante.getGastosEnvio());
-        Cesta.precio.setText(gastosEnvio);
+        Cesta_v.precio.setText(gastosEnvio);
     }
     
     public static String devolverDireccionUsuario(Direccion direccion) {
@@ -132,7 +132,7 @@ public class Cesta_c {
         return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
     }
     
-    public static void exportarVenta(Restaurante restaurante, List<Comida> comidas, List<Integer> cantidades, Usuario usuario) {
+    public static void exportarVenta(Restaurante_m restaurante, List<Comida_m> comidas, List<Integer> cantidades, Usuario usuario) {
         
         LocalTime horaActual = LocalTime.now(); 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -143,7 +143,7 @@ public class Cesta_c {
         
         List<String> datosComidas = new ArrayList<>();
         for (int i = 0; i < comidas.size(); i++) {
-            Comida comida = comidas.get(i);
+            Comida_m comida = comidas.get(i);
             int cantidad = cantidades.get(i);
             String datosComida = comida.getNombre() + " (Cantidad: " + cantidad + ", Precio: $" + comida.getPrecio() + ")";
             datosComidas.add(datosComida);
@@ -169,8 +169,8 @@ public class Cesta_c {
        
     }
     
-    public static void exportarDatos(String nombreArchivo, Restaurante restaurante,
-            List<Comida> comidas, List<Integer> cantidades, Usuario us){
+    public static void exportarDatos(String nombreArchivo, Restaurante_m restaurante,
+            List<Comida_m> comidas, List<Integer> cantidades, Usuario us){
             
         
         LocalTime horaActual = LocalTime.now(); 
@@ -186,7 +186,7 @@ public class Cesta_c {
             fileWriter.write("Dirección del Restaurante: " + devolverDireccionRestaurante(restaurante.getDireccion()) + "\n");
             fileWriter.write("Comidas Compradas:\n");
             for (int i = 0; i < comidas.size(); i++) {
-                Comida comida = comidas.get(i);
+                Comida_m comida = comidas.get(i);
                 int cantidad = cantidades.get(i);
                 fileWriter.write("- " + comida.getNombre() + " (Cantidad: " + cantidad + ", Precio: $" + comida.getPrecio() + ")\n");
             }
@@ -203,20 +203,20 @@ public class Cesta_c {
     
      public static void calcularPrecioFinal() {
         
-        if (Cesta_c.getRestauranteFromItem().isCateringParaEmpresas()) {
+        if (Cesta_m.getRestauranteFromItem().isCateringParaEmpresas()) {
             if (Establecimiento.jCheckBox1.isSelected() || Establecimiento.jCheckBox2.isSelected() || 
                     Establecimiento.jCheckBox3.isSelected() || Establecimiento.jCheckBox4.isSelected()) {
                 gastosE = 0;
                 precio.setText("0.0");
             }
-            Double precioF = total + Establecimiento_c.precioCatering() + gastosE;
+            Double precioF = total + Restaurante_m.precioCatering() + gastosE;
             String precioFinalStr = String.valueOf(precioF);
-            Cesta.precioFinal.setText(precioFinalStr);
+            Cesta_v.precioFinal.setText(precioFinalStr);
         }
         else {
             Double precioF = total * 0.9 + gastosE; 
             String precioFinalStr = String.valueOf(precioF);
-            Cesta.precioFinal.setText(precioFinalStr);
+            Cesta_v.precioFinal.setText(precioFinalStr);
         }
     }
     

@@ -8,9 +8,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
 import static poo.pl2.views.Menu.jList1;
 
-public class Menu_c {
+public class Menu_m {
     
-    public static void populateItemBox(JList jl, List<Restaurante> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering, boolean filtroCalificacion) {
+    public static void populateItemBox(JList jl, List<Restaurante_m> restaurantes, String codigoPostalUsuario, String especialidad, boolean especialidadBool, boolean filtroTiempoEnvio, boolean filtroCatering, boolean filtroCalificacion) {
         
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         String primerosDigitos = codigoPostalUsuario.substring(0, 4);
@@ -33,7 +33,7 @@ public class Menu_c {
             restaurantes = ordenarPorCalificacion(restaurantes, true);
         }
 
-        for (Restaurante restaurante : restaurantes) {
+        for (Restaurante_m restaurante : restaurantes) {
             String codigoPostalRestaurante = restaurante.getDireccion().getCodigoPostal();
             if (codigoPostalRestaurante.startsWith(primerosDigitos)) {
                 model.addElement(restaurante.getNombre());
@@ -48,12 +48,12 @@ public class Menu_c {
         jl.setModel(model);
     }
 
-    public static List<Restaurante> filtrarPorEspecialidad(List<Restaurante> restaurantes, String especialidad) {
+    public static List<Restaurante_m> filtrarPorEspecialidad(List<Restaurante_m> restaurantes, String especialidad) {
 
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+        List<Restaurante_m> restaurantesFiltrados = new ArrayList<>();
 
 
-        for (Restaurante restaurante : restaurantes) {
+        for (Restaurante_m restaurante : restaurantes) {
             if (restaurante.getEspecialidad().equals(especialidad)) {
                 System.out.println("coinciden");
                 restaurantesFiltrados.add(restaurante);
@@ -65,11 +65,11 @@ public class Menu_c {
     }
     
 
-    public static List<Restaurante> filtrarPorCatering(List<Restaurante> restaurantes, boolean cateringDisponible) {
+    public static List<Restaurante_m> filtrarPorCatering(List<Restaurante_m> restaurantes, boolean cateringDisponible) {
         
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>();
+        List<Restaurante_m> restaurantesFiltrados = new ArrayList<>();
 
-        for (Restaurante restaurante : restaurantes) {
+        for (Restaurante_m restaurante : restaurantes) {
             if (restaurante.isCateringParaEmpresas() == cateringDisponible) {
                 restaurantesFiltrados.add(restaurante);
             }
@@ -78,14 +78,14 @@ public class Menu_c {
         return restaurantesFiltrados;
     }
     
-    public static List<Restaurante> ordenarPorTiempoEnvio(List<Restaurante> restaurantes, boolean filtroTiempoEnvio) {
-        List<Restaurante> restaurantesFiltrados = new ArrayList<>(restaurantes);
+    public static List<Restaurante_m> ordenarPorTiempoEnvio(List<Restaurante_m> restaurantes, boolean filtroTiempoEnvio) {
+        List<Restaurante_m> restaurantesFiltrados = new ArrayList<>(restaurantes);
 
         if (filtroTiempoEnvio) {
             // Ordenar los restaurantes por tiempo medio de envío de forma ascendente
-            Collections.sort(restaurantesFiltrados, new Comparator<Restaurante>() {
+            Collections.sort(restaurantesFiltrados, new Comparator<Restaurante_m>() {
                 @Override
-                public int compare(Restaurante r1, Restaurante r2) {
+                public int compare(Restaurante_m r1, Restaurante_m r2) {
                     return Double.compare(r1.getTiempoMedioEnvio(), r2.getTiempoMedioEnvio());
                 }
             });
@@ -94,16 +94,16 @@ public class Menu_c {
         return restaurantesFiltrados;
     }
 
-    public static List<Restaurante> ordenarPorCalificacion(List<Restaurante> restaurantes, boolean filtroCalificacion) {
+    public static List<Restaurante_m> ordenarPorCalificacion(List<Restaurante_m> restaurantes, boolean filtroCalificacion) {
         
-        List<Restaurante> restaurantesOrdenados = new ArrayList<>(restaurantes);
+        List<Restaurante_m> restaurantesOrdenados = new ArrayList<>(restaurantes);
 
         
         if (filtroCalificacion) {
             // Ordenar los restaurantes por calificación media de forma descendente
-            Collections.sort(restaurantesOrdenados, new Comparator<Restaurante>() {
+            Collections.sort(restaurantesOrdenados, new Comparator<Restaurante_m>() {
 
-                public int compare(Restaurante r1, Restaurante r2) {
+                public int compare(Restaurante_m r1, Restaurante_m r2) {
                     System.out.println(r1.getCalificacion());
                     System.out.println(r2.getCalificacion());
                     return Double.compare(r2.getCalificacion(), r1.getCalificacion());
@@ -115,7 +115,7 @@ public class Menu_c {
 
 
     
-    public String obtenerDescripcion(Restaurante restaurante) {
+    public String obtenerDescripcion(Restaurante_m restaurante) {
         
         String returnVal = "Not found";
         if (jList1.getSelectedValue().equals(restaurante.getNombre())) {
@@ -124,9 +124,9 @@ public class Menu_c {
         return returnVal;
     }
     
-    public static Restaurante getRestauranteFromItem() {
+    public static Restaurante_m getRestauranteFromItem() {
     
-        List<Restaurante> restaurantes = Restaurante.restaurantes;
+        List<Restaurante_m> restaurantes = Restaurante_m.restaurantes;
         // Desde un array con todos los restaurantes...
         // TODO: Revisar Java Streams!!!
         return restaurantes.stream().filter((elem) -> {

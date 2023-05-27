@@ -2,8 +2,8 @@ package poo.pl2.views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import poo.pl2.models.Cesta_c;
-import poo.pl2.models.Restaurante;
+import poo.pl2.models.Cesta_m;
+import poo.pl2.models.Restaurante_m;
 import poo.pl2.models.Usuario;
 
 public class Admin extends javax.swing.JDialog {
@@ -103,13 +103,13 @@ public class Admin extends javax.swing.JDialog {
 
     private void showRestaruantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRestaruantsActionPerformed
         // TODO add your handling code here:
-        System.out.println(Restaurante.restaurantes);
+        System.out.println(Restaurante_m.restaurantes);
     }//GEN-LAST:event_showRestaruantsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Cesta_c.cargarVentaData();
-        System.out.println(Cesta.ventaData);
+        Cesta_m.cargarVentaData();
+        System.out.println(Cesta_v.ventaData);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
