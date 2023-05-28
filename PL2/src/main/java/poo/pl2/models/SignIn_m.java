@@ -93,10 +93,9 @@ public class SignIn_m {
  
         // Valida la cadena especificada que contiene una dirección de correo electrónico
         if (!validator.isValid(email)) {
-            System.out.println("no valida");
+            System.out.println("Correo electrónico no válido");
             return false;
         }
-        System.out.println("valida");
         return true;
     }
 }

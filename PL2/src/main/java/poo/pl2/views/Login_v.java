@@ -189,7 +189,7 @@ public class Login_v extends javax.swing.JFrame {
             this.setVisible(false);
         }
         else if (Login_m.checkAdmin()) {
-            Admin admin = new Admin(this, true);
+            Admin_v admin = new Admin_v();
             this.setVisible(false);
         }
         else {
@@ -216,7 +216,7 @@ public class Login_v extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             else if (Login_m.checkAdmin() == true) {
-                Admin admin = new Admin(this, true);
+                Admin_v admin = new Admin_v();
                 this.setVisible(false);
             }
             else {

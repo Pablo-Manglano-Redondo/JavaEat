@@ -266,7 +266,7 @@ public class Restaurante_m {
      */
     public static void cargarCatering() {
         if (getRestauranteFromItem().isCateringParaEmpresas()) {
-            System.out.println("es visible");
+            System.out.println("Es visible");
         } else {
             Restaurante_v.catering.setVisible(false);
         }
@@ -278,7 +278,6 @@ public class Restaurante_m {
      * @return Precio de las opciones de catering.
      */
     public static Double precioCatering() {
-        System.out.println(Restaurante_v.precioOpcionesCatering);
         return Restaurante_v.precioOpcionesCatering;
     }
 

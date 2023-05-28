@@ -109,7 +109,6 @@ public class Serializacion {
             }
             System.out.println("Los comentarios se han cargado correctamente.");
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("tester 1");
             Restaurante_v.comentarios = new ArrayList<>();
             System.out.println("No se encontraron comentarios existentes.");
         }
