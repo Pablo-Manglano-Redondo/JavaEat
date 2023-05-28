@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import poo.pl2.models.Comentario;
 import poo.pl2.models.Comida_m;
 import poo.pl2.models.Restaurante_m;
+import poo.pl2.models.Serializacion;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Restaurante_v extends javax.swing.JFrame {
         Restaurante_m.populateItemBox(this.jList2, Restaurante_m.comidas);
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
-        Restaurante_m.cargarDatosComentario(); 
+        Serializacion.cargarDatosComentario(); 
         changeFont();
         Restaurante_m.cargarCatering();
         this.setVisible(true);
@@ -347,7 +348,7 @@ public class Restaurante_v extends javax.swing.JFrame {
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         // TODO add your handling code here:
 
-        Comida_m comidaSeleccionada = Restaurante_m.getComidaFromItem();
+        Comida_m comidaSeleccionada = Comida_m.getComidaFromItem();
         Comida_v platoo = new Comida_v(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
 
     }//GEN-LAST:event_jList2MouseClicked
@@ -365,9 +366,9 @@ public class Restaurante_v extends javax.swing.JFrame {
 
         Comentario comentario = new Comentario(jTextField1.getText(), Login_v.usuario.getText(),
             horaActual.toString(), calificacion.getSelectedIndex() + 1);
-        Restaurante_m.agregarComentario(comentario);
+        Comentario.agregarComentario(comentario);
 
-        Restaurante_m.guardarDatosComentario();
+        Serializacion.guardarDatosComentario();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -281,49 +281,6 @@ public class Restaurante_m {
         System.out.println(Restaurante_v.precioOpcionesCatering);
         return Restaurante_v.precioOpcionesCatering;
     }
-    
-    /**
-     * Guarda los comentarios en un archivo llamado "copiaSegComentarios.dat" utilizando serialización de objetos.
-     */
-    public static void guardarDatosComentario() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("persistencia/copiaSegComentarios.dat");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(Restaurante_v.comentarios);
-            out.close();
-            fileOut.close();
-            System.out.println("Los comentarios se han guardado correctamente.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-     /**
-     * Carga los comentarios desde persistencia y los muestra en el cuadro de texto 'jTextArea1'.
-     * Si no se encuentran comentarios, se muestra un mensaje indicando eso.
-     */
-    public static void cargarDatosComentario() {
-        try {
-            FileInputStream fileIn = new FileInputStream("persistencia/copiaSegComentarios.dat");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            List<Comentario> comentarios = (List<Comentario>) in.readObject();
-            in.close();
-            fileIn.close();
-
-            // Limpiar el contenido existente en el JTextArea
-            Restaurante_v.jTextArea1.setText("");
-
-            // Mostrar cada comentario en el JTextArea
-            for (Comentario comentario : comentarios) {
-                mostrarComentario(comentario);
-            }
-            System.out.println("Los comentarios se han cargado correctamente.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("tester 1");
-            Restaurante_v.comentarios = new ArrayList<>();
-            System.out.println("No se encontraron comentarios existentes.");
-        }
-    }
 
     /**
      * Agrega un comentario a la lista de comentarios del restaurante.
@@ -332,48 +289,8 @@ public class Restaurante_m {
      *
      * @param comentario El comentario a agregar.
      */
-    public static void agregarComentario(Comentario comentario) {
-        if (Restaurante_v.comentarios == null) {
-            System.out.println("El objeto 'comentarios' es nulo.");
-        } else {
-            Restaurante_v.comentarios.add(comentario);
-            System.out.println("Se ha agregado un nuevo comentario.");
-            mostrarComentario(comentario);
-        }
-    }
-
-    /**
-     * Muestra un comentario en el cuadro de texto 'jTextArea1'.
-     *
-     * @param comentario El comentario a mostrar.
-     */
-    public static void mostrarComentario(Comentario comentario) {
-        if (Restaurante_v.comentarios != null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Autor: ").append(comentario.getAutor()).append("\n");
-            sb.append("Fecha: ").append(comentario.getFecha()).append("\n");
-            sb.append("Contenido: ").append(comentario.getContenido()).append("\n");
-            sb.append("Calificación: ").append(comentario.getCalificacion()).append("\n");
-            sb.append("----------------------\n");
-            Restaurante_v.jTextArea1.append(sb.toString());
-        } else {
-            Restaurante_v.jTextArea1.setText("No hay comentarios disponibles.");
-        }
-    }
-
-
-    /**
-     * Obtiene el objeto de comida correspondiente al elemento seleccionado en la lista.
-     *
-     * @return El objeto Comida correspondiente al elemento seleccionado en la lista.
-     */
-    public static Comida_m getComidaFromItem() {
-        List<Comida_m> comidas = Restaurante_m.comidas;
-        return comidas.stream().filter((elem) -> {
-            return elem.getNombre().equals(Restaurante_v.jList2.getSelectedValue());
-        }).findAny().get();
-    }
-
+    
+    
     /**
      * Rellena el cuadro de lista especificado con los nombres de las comidas del restaurante seleccionado.
      *

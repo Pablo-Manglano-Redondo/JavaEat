@@ -5,8 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import static poo.pl2.models.Usuario.usuarios;
+import poo.pl2.views.Restaurante_v;
 
 /**
  * La clase Serializacion se encarga de la serialización y deserialización de objetos de la clase Usuario.
@@ -68,4 +71,48 @@ public class Serializacion {
         }
     }
 
+    
+    /**
+     * Guarda los comentarios en un archivo llamado "copiaSegComentarios.dat" utilizando serialización de objetos.
+     */
+    public static void guardarDatosComentario() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("persistencia/copiaSegComentarios.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Restaurante_v.comentarios);
+            out.close();
+            fileOut.close();
+            System.out.println("Los comentarios se han guardado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+     /**
+     * Carga los comentarios desde persistencia y los muestra en el cuadro de texto 'jTextArea1'.
+     * Si no se encuentran comentarios, se muestra un mensaje indicando eso.
+     */
+    public static void cargarDatosComentario() {
+        try {
+            FileInputStream fileIn = new FileInputStream("persistencia/copiaSegComentarios.dat");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            List<Comentario> comentarios = (List<Comentario>) in.readObject();
+            in.close();
+            fileIn.close();
+
+            // Limpiar el contenido existente en el JTextArea
+            Restaurante_v.jTextArea1.setText("");
+
+            // Mostrar cada comentario en el JTextArea
+            for (Comentario comentario : comentarios) {
+                Comentario.mostrarComentario(comentario);
+            }
+            System.out.println("Los comentarios se han cargado correctamente.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("tester 1");
+            Restaurante_v.comentarios = new ArrayList<>();
+            System.out.println("No se encontraron comentarios existentes.");
+        }
+    }
+    
 }
