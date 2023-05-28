@@ -16,7 +16,6 @@ import poo.pl2.views.Cesta_v;
 import static poo.pl2.views.Cesta_v.gastosE;
 import static poo.pl2.views.Cesta_v.precio;
 import static poo.pl2.views.Cesta_v.total;
-import poo.pl2.views.Menu_v;
 import poo.pl2.views.Comida_v;
 import poo.pl2.views.Restaurante_v;
 
