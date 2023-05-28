@@ -1,16 +1,26 @@
 package poo.pl2;
 
 import poo.pl2.models.Direccion;
-import poo.pl2.views.Login;
+import poo.pl2.views.Login_v;
 import poo.pl2.models.Restaurante_m;
 import poo.pl2.models.Comida_m;
 import poo.pl2.models.Serializacion;
 import poo.pl2.models.TarjetaCredito;
 import poo.pl2.models.Usuario;
 
+/**
+ *
+ * @author pablo
+ */
 public class PL2 {
 
-    public static void main(String[] args) {
+    /**
+     *
+     * @param args
+     * @throws ClassNotFoundException
+     * @throws Exception
+     */
+    public static void main(String[] args) throws ClassNotFoundException, Exception {
         
         Serializacion.cargarDatosUsuario();
         
@@ -19,9 +29,9 @@ public class PL2 {
         Direccion direccionUsuario = new Direccion("Avenida de la Luna", "12345",
                 "Madrid", "19198");  
         
-        Usuario usuario1 = new Usuario("pablo", "pablomanglano4235@gmail.com", "pablo", direccionUsuario, tarjetaUsuario, "608 05 96 62", "03492382Q");
-        Usuario usuario2 = new Usuario("pepe", "pepemanglano4235@gmail.com", "pepe", direccionUsuario, tarjetaUsuario, "608 05 96 63", "03492382K");
-        Usuario usuario3 = new Usuario("pedro", "pedromanglano4235@gmail.com", "pedro", direccionUsuario, tarjetaUsuario, "608 05 96 64", "03492382M");
+        Usuario usuario1 = new Usuario("pablo", "pablomanglano4235@gmail.com", "pablo", direccionUsuario, tarjetaUsuario, "608 05 96 62", "03492382Q", "");
+        Usuario usuario2 = new Usuario("pepe", "pepemanglano4235@gmail.com", "pepe", direccionUsuario, tarjetaUsuario, "608 05 96 63", "03492382K", "");
+        Usuario usuario3 = new Usuario("pedro", "pedromanglano4235@gmail.com", "pedro", direccionUsuario, tarjetaUsuario, "608 05 96 64", "03492382M", "");
         
         Usuario.usuarios.put(usuario1.getEmail(), usuario1);
         Usuario.usuarios.put(usuario2.getEmail(), usuario2);
@@ -88,7 +98,7 @@ public class PL2 {
         Restaurante_m.comidas.add(comida12);
         
      
-        Login f = new Login();
+        Login_v f = new Login_v();
         f.setVisible (true);
         Serializacion.guardarDatosUsuario();
         

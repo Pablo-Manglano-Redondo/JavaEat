@@ -5,8 +5,23 @@ import javax.swing.ImageIcon;
 import poo.pl2.models.Cesta_m;
 import poo.pl2.models.Usuario;
 
-public class DatosPersonales extends javax.swing.JDialog {
+/**
+ *
+ * @author pablo
+ */
 
+public class DatosPersonales extends javax.swing.JDialog {
+    
+    char[] passwordChars = Login_v.contraseña.getPassword();
+    String contraseña = String.valueOf(passwordChars);
+    Usuario user = Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña, Usuario.listaUsuarios);
+
+    
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public DatosPersonales(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -26,6 +41,9 @@ public class DatosPersonales extends javax.swing.JDialog {
         this.setVisible(true);
     }
     
+    /**
+     *
+     */
     public void scaleImage(){
         ImageIcon logo = new ImageIcon("media/def.png");
         Image img = logo.getImage();
@@ -36,11 +54,11 @@ public class DatosPersonales extends javax.swing.JDialog {
         Imagen.setIcon(scaledIcon);
     }
 
+    /**
+     *
+     */
     public void poblarCampos() {
         
-        char[] passwordChars = Login.contraseña.getPassword();
-        String contraseña = String.valueOf(passwordChars);
-        Usuario user = Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña, Usuario.listaUsuarios);
         Correo.setText(user.getEmail());
         Password.setText(contraseña);
         DNI.setText(user.getDni());
@@ -69,6 +87,12 @@ public class DatosPersonales extends javax.swing.JDialog {
         Telefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreActionPerformed(evt);
+            }
+        });
 
         Direccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +132,12 @@ public class DatosPersonales extends javax.swing.JDialog {
         DNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DNIActionPerformed(evt);
+            }
+        });
+
+        Telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TelefonoActionPerformed(evt);
             }
         });
 
@@ -172,6 +202,8 @@ public class DatosPersonales extends javax.swing.JDialog {
 
     private void WebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WebActionPerformed
         // TODO add your handling code here:
+        user.setWeb(Web.getText());
+
     }//GEN-LAST:event_WebActionPerformed
 
     private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
@@ -184,11 +216,23 @@ public class DatosPersonales extends javax.swing.JDialog {
 
     private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
         // TODO add your handling code here:
+        user.setDni(DNI.getText());
     }//GEN-LAST:event_DNIActionPerformed
 
     private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CorreoActionPerformed
+
+    private void TelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonoActionPerformed
+        // TODO add your handling code here:
+        user.setTelefono(Telefono.getText());
+    }//GEN-LAST:event_TelefonoActionPerformed
+
+    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
+        // TODO add your handling code here:
+        user.setNombre(Nombre.getText());
+
+    }//GEN-LAST:event_NombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,12 +277,12 @@ public class DatosPersonales extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Correo;
+    public static javax.swing.JTextField Correo;
     public static javax.swing.JTextField DNI;
     public static javax.swing.JTextField Direccion;
     private javax.swing.JLabel Imagen;
     public static javax.swing.JTextField Nombre;
-    private javax.swing.JPasswordField Password;
+    public static javax.swing.JPasswordField Password;
     private javax.swing.JButton Submit;
     public static javax.swing.JTextField Tarjeta;
     public static javax.swing.JTextField Telefono;

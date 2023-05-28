@@ -4,6 +4,7 @@
  */
 package poo.pl2.views;
 
+import javax.swing.JOptionPane;
 import poo.pl2.models.SignIn_m;
 
 /**
@@ -12,6 +13,11 @@ import poo.pl2.models.SignIn_m;
  */
 public class Direccion_v extends javax.swing.JDialog {
 
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public Direccion_v(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -39,7 +45,19 @@ public class Direccion_v extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        codigoPostal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codigoPostalKeyTyped(evt);
+            }
+        });
+
+        localidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                localidadKeyTyped(evt);
+            }
+        });
+
+        jButton1.setText("Introducir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -87,7 +105,36 @@ public class Direccion_v extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         SignIn_m.registerDireccion();
+        JOptionPane.showMessageDialog(this, "Direccion registrada correctamente.");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void codigoPostalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigoPostalKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 48 && key <= 57;
+        
+        if (!numero) {
+            
+            evt.consume();
+            
+        }
+    }//GEN-LAST:event_codigoPostalKeyTyped
+
+    private void localidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_localidadKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 65 && key <= 90 || key >= 97 && key <= 122 ;
+        
+        if (!numero) {
+            
+            evt.consume();
+            
+        }
+    }//GEN-LAST:event_localidadKeyTyped
 
     /**
      * @param args the command line arguments

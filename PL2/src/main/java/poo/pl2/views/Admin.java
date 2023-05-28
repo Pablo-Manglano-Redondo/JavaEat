@@ -6,8 +6,17 @@ import poo.pl2.models.Cesta_m;
 import poo.pl2.models.Restaurante_m;
 import poo.pl2.models.Usuario;
 
+/**
+ *
+ * @author pablo
+ */
 public class Admin extends javax.swing.JDialog {
 
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public Admin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -17,7 +26,12 @@ public class Admin extends javax.swing.JDialog {
         this.setVisible(true);
     }
 
-    private void scaleImage(){
+        /**
+     * Este método escala una imagen y la muestra en un componente de imagen.
+     * La imagen se carga desde el archivo "media/def.png" y se ajusta al tamaño del componente Imagen.
+     * El método establece la ubicación del componente en el centro de la pantalla y actualiza el contenido del componente.
+     */
+    private void scaleImage() {
         ImageIcon logo = new ImageIcon("media/def.png");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_SMOOTH);
@@ -25,8 +39,8 @@ public class Admin extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         Imagen.setText("");
         Imagen.setIcon(scaledIcon);
-
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,22 +111,30 @@ public class Admin extends javax.swing.JDialog {
 
     private void showUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUsersActionPerformed
         // TODO add your handling code here:
+        
         // MOSTRAR USUARIOS
         System.out.println(Usuario.usuarios);
     }//GEN-LAST:event_showUsersActionPerformed
 
     private void showRestaruantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRestaruantsActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        
+        // MOSTRAR RESTAURANTES
         System.out.println(Restaurante_m.restaurantes);
     }//GEN-LAST:event_showRestaruantsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        // MOSTRAR VENTAS
         Cesta_m.cargarVentaData();
         System.out.println(Cesta_v.ventaData);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

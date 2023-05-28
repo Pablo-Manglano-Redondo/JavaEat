@@ -1,13 +1,7 @@
 package poo.pl2.views;
 
 import java.awt.Image;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JList;
 import poo.pl2.models.Cesta_m;
 import poo.pl2.models.Menu_m;
 import poo.pl2.models.Restaurante_m;
@@ -17,21 +11,23 @@ import poo.pl2.models.Usuario;
  *
  * @author pablo
  */
-
-public class Menu extends javax.swing.JFrame {
+public class Menu_v extends javax.swing.JFrame {
     
-    char[] passwordChars = Login.contraseña.getPassword();
+    char[] passwordChars = Login_v.contraseña.getPassword();
     String contraseña = String.valueOf(passwordChars);
     
     boolean catering = false;
     boolean relevancia = false;
     String especialidad;
     
-    public Menu() {
+    /**
+     *
+     */
+    public Menu_v() {
         
         initComponents();
         scaleImage();
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
                 Usuario.listaUsuarios).getDireccion()), especialidad, false, relevancia ,catering, false);
         this.setVisible(true);
         
@@ -49,7 +45,6 @@ public class Menu extends javax.swing.JFrame {
 
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,49 +54,22 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        Imagen = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         reset = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        Imagen = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Ordenar por relevancia ");
-
-        jLabel2.setText("Ordenar por tiempo medio de envio");
-
-        jLabel3.setText("Servicio de catering disponible");
-
-        Imagen.setText("jLabel4");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        jButton2.setText("Modificación datos personales");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Especialidad");
 
@@ -126,12 +94,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Ordenar por relevancia ");
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "China", "Sushi", "Mexicana", "Española" }));
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1MouseClicked(evt);
             }
         });
+
+        jLabel2.setText("Ordenar por tiempo medio de envio");
 
         reset.setText("resetear filtros");
         reset.addActionListener(new java.awt.event.ActionListener() {
@@ -140,10 +112,33 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Servicio de catering disponible");
+
         jButton5.setText("jButton5");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        Imagen.setText("jLabel4");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jButton2.setText("Modificación datos personales");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -193,7 +188,7 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(jLabel3))
                                     .addComponent(jButton5))))
                         .addGap(100, 100, 100)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,12 +209,11 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(reset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(reset)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -233,53 +227,53 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        catering = true;
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
+            Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering, false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
+            Usuario.listaUsuarios).getDireccion()),especialidad ,false, true,false, false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
+            Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,false, true);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
+            Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false, false); //revisar el filtro especialidad
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        especialidad = String.valueOf(jComboBox1.getSelectedItem());
+        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Usuario.devolverCodigoPostalUsuario(Usuario.buscarUsuario(Login_v.usuario.getText(), contraseña,
+            Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false, false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        Establecimiento establecimiento = new Establecimiento(jList1.getSelectedValue(),
-                Menu_m.getRestauranteFromItem().getDescripcion());
+        Restaurante_v establecimiento = new Restaurante_v(jList1.getSelectedValue(),
+            Restaurante_m.getRestauranteFromItem().getDescripcion());
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         DatosPersonales datos = new DatosPersonales(this,true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        catering = true;
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,catering, false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        // TODO add your handling code here:
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()), especialidad, false,false, false, false); //revisar el filtro especialidad
-    }//GEN-LAST:event_resetActionPerformed
-
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1MouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        especialidad = String.valueOf(jComboBox1.getSelectedItem());
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,true, false,false, false);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,false, true,false, false);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        Menu_m.populateItemBox(this.jList1, Restaurante_m.restaurantes, Cesta_m.devolverCodigoPostalUsuario(Cesta_m.buscarUsuario(Login.usuario.getText(), contraseña,
-                Usuario.listaUsuarios).getDireccion()),especialidad ,false, false,false, true);
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,20 +292,20 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new Menu_v().setVisible(true);
             }
         });
     }

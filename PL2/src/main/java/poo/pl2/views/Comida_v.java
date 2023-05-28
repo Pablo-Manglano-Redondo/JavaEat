@@ -9,19 +9,34 @@ import poo.pl2.models.Comida_m;
  *
  * @author pablo
  */
-public class Plato extends javax.swing.JDialog {
+
+public class Comida_v extends javax.swing.JDialog {
     
+    /**
+     * Lista de cantidades de comidas.
+     */
     public static ArrayList<Integer> cantidades = new ArrayList<>();
     
     /**
-     * Creates new form Plato
+     * Crea una nueva instancia de la clase Comida_v.
+     *
+     * @param parent el Frame padre de la ventana de diálogo
+     * @param modal un booleano que indica si la ventana de diálogo es modal o no
      */
-    public Plato(java.awt.Frame parent, boolean modal) {
+    public Comida_v(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
-    public Plato(java.awt.Frame parent, boolean modal, Double precio, String nombre, String descripcion) {
+    
+        /**
+     *
+     * @param parent
+     * @param modal
+     * @param precio
+     * @param nombre
+     * @param descripcion
+     */
+    public Comida_v(java.awt.Frame parent, boolean modal, Double precio, String nombre, String descripcion) {
         super(parent, modal);
         initComponents();
         scaleImage();
@@ -31,9 +46,10 @@ public class Plato extends javax.swing.JDialog {
         descripcionRestaurante.setText(descripcion);
         this.setVisible(true);
     }
+
     
     private void scaleImageComida() {
-        ImageIcon logo = new ImageIcon("media/" + Establecimiento.jList2.getSelectedValue() + ".jpg");
+        ImageIcon logo = new ImageIcon("media/" + Restaurante_v.jList2.getSelectedValue() + ".jpg");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(imagenComida.getWidth(), imagenComida.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -54,6 +70,7 @@ public class Plato extends javax.swing.JDialog {
     }
    
     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +122,7 @@ public class Plato extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 925, Short.MAX_VALUE))
+                .addGap(0, 858, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -138,7 +155,7 @@ public class Plato extends javax.swing.JDialog {
                         .addComponent(imagenComida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pedido))
@@ -165,7 +182,7 @@ public class Plato extends javax.swing.JDialog {
         // TODO add your handling code here:
         Comida_m value = Comida_m.getComidaFromItem();
         Comida_m.carritos.add(value);
-        cantidades.add(Plato.cantidad.getSelectedIndex() + 1);
+        cantidades.add(Comida_v.cantidad.getSelectedIndex() + 1);
     }//GEN-LAST:event_pedidoActionPerformed
 
     /**
@@ -185,20 +202,20 @@ public class Plato extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Plato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comida_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Plato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comida_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Plato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comida_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Plato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Comida_v.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Plato dialog = new Plato(new javax.swing.JFrame(), true);
+                Comida_v dialog = new Comida_v(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

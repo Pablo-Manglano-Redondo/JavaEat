@@ -1,5 +1,6 @@
 package poo.pl2.views;
 
+import javax.swing.JOptionPane;
 import poo.pl2.models.SignIn_m;
 
 /**
@@ -10,13 +11,15 @@ public class TarjetaCredito_v extends javax.swing.JDialog {
 
     /**
      * Creates new form TarjetaCredito_v
+     * @param parent
+     * @param modal
      */
     public TarjetaCredito_v(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         TextPrompt numeroTarjetaa = new TextPrompt("Número tarjeta", numeroTarjeta);
         TextPrompt titularr = new TextPrompt("Titular de la tarjeta", titular);
-        TextPrompt fechaNacimientoo = new TextPrompt("DD/MM/YY", fechaNacimiento);
+        TextPrompt fechaNacimientoo = new TextPrompt("DD/MM/YYYY", fechaNacimiento);
         setVisible(true);
     }
 
@@ -42,7 +45,25 @@ public class TarjetaCredito_v extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        numeroTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                numeroTarjetaKeyTyped(evt);
+            }
+        });
+
+        titular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                titularKeyTyped(evt);
+            }
+        });
+
+        fechaNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fechaNacimientoKeyTyped(evt);
+            }
+        });
+
+        jButton1.setText("Introducir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,7 +107,51 @@ public class TarjetaCredito_v extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         SignIn_m.registerTarjeta();
+        JOptionPane.showMessageDialog(this, "Tarjeta de crédito registrada correctamente.");
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void numeroTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numeroTarjetaKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 48 && key <= 57;
+        
+        if (!numero) {
+            
+            evt.consume();
+            
+        }
+    }//GEN-LAST:event_numeroTarjetaKeyTyped
+
+    private void titularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_titularKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 65 && key <= 90 || key >= 97 && key <= 122 ;
+        
+        if (!numero) {
+            
+            evt.consume();
+            
+        }
+    }//GEN-LAST:event_titularKeyTyped
+
+    private void fechaNacimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacimientoKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 48 && key <= 57;
+        
+        if (!numero) {
+            
+            evt.consume();
+            
+        }
+    }//GEN-LAST:event_fechaNacimientoKeyTyped
 
     /**
      * @param args the command line arguments

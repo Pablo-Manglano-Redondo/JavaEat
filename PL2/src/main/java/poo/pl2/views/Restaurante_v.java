@@ -9,21 +9,40 @@ import javax.swing.ImageIcon;
 import poo.pl2.models.Comentario;
 import poo.pl2.models.Comida_m;
 import poo.pl2.models.Restaurante_m;
-import static poo.pl2.views.Establecimiento.precioOpcionesCatering;
 
+/**
+ *
+ * @author pablo
+ */
 public class Restaurante_v extends javax.swing.JFrame {
 
     double calificacionMedia;
+
+    /**
+     *
+     */
     public static List<Comentario> comentarios = new ArrayList();
+
+    /**
+     *
+     */
     public static Double precioOpcionesCatering = 0.0;
     Restaurante_m restaurante = Restaurante_m.getRestauranteFromItem();
     
+    /**
+     *
+     */
     public Restaurante_v() {
         initComponents();
         scaleImage();
         scaleImageRestaurante();
     }
 
+    /**
+     *
+     * @param nombre
+     * @param descripcion
+     */
     public Restaurante_v(String nombre, String descripcion) {
 
         initComponents();
@@ -33,14 +52,14 @@ public class Restaurante_v extends javax.swing.JFrame {
         Restaurante_m.populateItemBox(this.jList2, Restaurante_m.comidas);
         nombreRestaurante.setText(nombre);
         descripcionRestaurante.setText(descripcion);
-        //cargarDatosComentario(); FALLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        Restaurante_m.cargarDatosComentario(); 
         changeFont();
         Restaurante_m.cargarCatering();
         this.setVisible(true);
     }
     
     private void scaleImageRestaurante() {
-        ImageIcon logo = new ImageIcon("media/" + Menu.jList1.getSelectedValue() + ".jpg");
+        ImageIcon logo = new ImageIcon("media/" + Menu_v.jList1.getSelectedValue() + ".jpg");
         Image img = logo.getImage();
         Image imgScale = img.getScaledInstance(imagenRestaurante.getWidth(), imagenRestaurante.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -116,6 +135,7 @@ public class Restaurante_v extends javax.swing.JFrame {
 
         Imagen.setText("Logo");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Críticas:\n\n");
@@ -149,8 +169,6 @@ public class Restaurante_v extends javax.swing.JFrame {
                 calificacionActionPerformed(evt);
             }
         });
-
-        valorCalificacion.setText("jLabel1");
 
         jLabel1.setText("Calificación:");
 
@@ -330,7 +348,7 @@ public class Restaurante_v extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Comida_m comidaSeleccionada = Restaurante_m.getComidaFromItem();
-        Plato platoo = new Plato(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
+        Comida_v platoo = new Comida_v(this, true, comidaSeleccionada.getPrecio(), comidaSeleccionada.getNombre(), comidaSeleccionada.getDescripcion());
 
     }//GEN-LAST:event_jList2MouseClicked
 
@@ -345,7 +363,7 @@ public class Restaurante_v extends javax.swing.JFrame {
 
         LocalTime horaActual = LocalTime.now();
 
-        Comentario comentario = new Comentario(jTextField1.getText(), Login.usuario.getText(),
+        Comentario comentario = new Comentario(jTextField1.getText(), Login_v.usuario.getText(),
             horaActual.toString(), calificacion.getSelectedIndex() + 1);
         Restaurante_m.agregarComentario(comentario);
 

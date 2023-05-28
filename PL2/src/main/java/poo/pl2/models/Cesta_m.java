@@ -16,16 +16,21 @@ import poo.pl2.views.Cesta_v;
 import static poo.pl2.views.Cesta_v.gastosE;
 import static poo.pl2.views.Cesta_v.precio;
 import static poo.pl2.views.Cesta_v.total;
-import poo.pl2.views.Establecimiento;
-import poo.pl2.views.Menu;
-import poo.pl2.views.Plato;
+import poo.pl2.views.Menu_v;
+import poo.pl2.views.Comida_v;
+import poo.pl2.views.Restaurante_v;
 
 /**
- *
- * @author pablo
+ * Esta clase representa el modelo de la cesta de compras.
+ * Contiene métodos relacionados con la gestión de la cesta y la exportación de datos.
  */
 public class Cesta_m {
     
+    /**
+     * Rellena la lista de la cesta con los detalles de las comidas seleccionadas.
+     *
+     * @param carro La lista de la cesta a ser actualizada.
+     */
     public static void populateCart(JList<String> carro) {
         DefaultListModel<String> detalles = new DefaultListModel<>();
         int i = 0;
@@ -35,7 +40,7 @@ public class Cesta_m {
 
             if (selectedComida != null) {
                 String details = "Nombre: " + selectedComida.getNombre() +
-                        ", Cantidad: " + Plato.cantidades.get(j++) +
+                        ", Cantidad: " + Comida_v.cantidades.get(j++) +
                         ", Precio: $" + selectedComida.getPrecio();
 
                 detalles.addElement(details);
@@ -45,6 +50,12 @@ public class Cesta_m {
         carro.setModel(detalles);
     }
     
+    /**
+     * Serializa y guarda los datos de la venta en un archivo.
+     *
+     * @param ventaData      Los datos de la venta a ser guardados.
+     * @param nombreArchivo  El nombre del archivo en el que se guardarán los datos.
+     */
     public static void serializarVentaData(List<String> ventaData, String nombreArchivo) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(nombreArchivo);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
@@ -57,10 +68,15 @@ public class Cesta_m {
         }
     }
     
+    /**
+     * Carga los datos de la venta desde un archivo serializado.
+     *
+     * @return Los datos de la venta cargados del archivo.
+     */
     public static List<String> cargarVentaData() {
         List<String> ventaData = null;
         
-        try (FileInputStream fileInputStream = new FileInputStream("CopiaSegVentas.dat");
+        try (FileInputStream fileInputStream = new FileInputStream("persistencia/CopiaSegVentas.dat");
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             
             ventaData = (ArrayList<String>) objectInputStream.readObject();
@@ -73,30 +89,29 @@ public class Cesta_m {
         return ventaData;
     }
     
-    public static Restaurante_m getRestauranteFromItem() {
     
-        List<Restaurante_m> restaurantes = Restaurante_m.restaurantes;
-        // Desde un array con todos los restaurantes...
-        // TODO: Revisar Java Streams!!!
-        return restaurantes.stream().filter((elem) -> {
-        
-            return elem.getNombre().equals(Menu.jList1.getSelectedValue());
-            
-        }).findAny().get();
-        
-    }
     
+    /**
+     * Calcula el precio total de la compra en la cesta.
+     *
+     * @param carritos La lista de comidas en la cesta.
+     */
     public static void calcularCarrito(List<Comida_m> carritos) {
     
     for (Comida_m carrito : carritos) {
         Comida_m alimento = carrito;
-        Cesta_v.total += alimento.getPrecio() * (Plato.cantidad.getSelectedIndex() + 1);
+        Cesta_v.total += alimento.getPrecio() * (Comida_v.cantidad.getSelectedIndex() + 1);
     }
 
     Cesta_v.numero.setText(String.valueOf(Cesta_v.total));
     
     }
     
+    /**
+     * Calcula los gastos de envío del restaurante.
+     *
+     * @param restaurante El restaurante del que se calcularán los gastos de envío.
+     */
     public static void calcularGastosEnvio(Restaurante_m restaurante) {
         
         gastosE = restaurante.getGastosEnvio();
@@ -104,34 +119,14 @@ public class Cesta_m {
         Cesta_v.precio.setText(gastosEnvio);
     }
     
-    public static String devolverDireccionUsuario(Direccion direccion) {
-        
-        String localidad = direccion.getCiudad();
-        String calle = direccion.getCalle();
-        String numero = direccion.getNumero();
-        String codigoPostal = direccion.getCodigoPostal();
-        
-        return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
-    }
-    
-    public static String devolverCodigoPostalUsuario(Direccion direccion) {
-        
-        String codigoPostal = direccion.getCodigoPostal();
-        
-        return codigoPostal;
-    }
-    
-    
-    public static String devolverDireccionRestaurante(Direccion direccion) {
-        
-        String localidad = direccion.getCiudad();
-        String calle = direccion.getCalle();
-        String numero = direccion.getNumero();
-        String codigoPostal = direccion.getCodigoPostal();
-        
-        return "Localidad: " + localidad + ", Codigo Postal: " + codigoPostal + ", Calle: " + calle + ", Numero: " + numero;
-    }
-    
+    /**
+     * Exporta los datos de la venta a un formato específico.
+     *
+     * @param restaurante El restaurante de la venta.
+     * @param comidas     La lista de comidas de la venta.
+     * @param cantidades  La lista de cantidades de cada comida.
+     * @param usuario     El usuario de la venta.
+     */
     public static void exportarVenta(Restaurante_m restaurante, List<Comida_m> comidas, List<Integer> cantidades, Usuario usuario) {
         
         LocalTime horaActual = LocalTime.now(); 
@@ -139,7 +134,7 @@ public class Cesta_m {
         String fecha = horaActual.format(formatter); 
         
         String nombreRestaurante = restaurante.getNombre();
-        String direccionRestaurante = devolverDireccionRestaurante(restaurante.getDireccion());
+        String direccionRestaurante = Restaurante_m.devolverDireccionRestaurante(restaurante.getDireccion());
         
         List<String> datosComidas = new ArrayList<>();
         for (int i = 0; i < comidas.size(); i++) {
@@ -151,7 +146,7 @@ public class Cesta_m {
         
         String nombreCliente = usuario.getNombre();
         String correoCliente = usuario.getEmail();
-        String direccionCliente = devolverDireccionUsuario(usuario.getDireccion());
+        String direccionCliente = Usuario.devolverDireccionUsuario(usuario.getDireccion());
         
         List<String> ventaData = new ArrayList<>();
         ventaData.add("Fecha de Venta: " + fecha);
@@ -169,6 +164,15 @@ public class Cesta_m {
        
     }
     
+    /**
+     * Exporta los datos de la venta a un archivo de texto.
+     *
+     * @param nombreArchivo El nombre del archivo en el que se guardarán los datos.
+     * @param restaurante   El restaurante de la venta.
+     * @param comidas       La lista de comidas de la venta.
+     * @param cantidades    La lista de cantidades de cada comida.
+     * @param us            El usuario de la venta.
+     */
     public static void exportarDatos(String nombreArchivo, Restaurante_m restaurante,
             List<Comida_m> comidas, List<Integer> cantidades, Usuario us){
             
@@ -179,11 +183,11 @@ public class Cesta_m {
         String horaTexto = horaActual.format(formatter); 
             
             
-        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+        try (FileWriter fileWriter = new FileWriter("ticket_compra/"+nombreArchivo)) {
 
             fileWriter.write("Fecha de Venta: " + horaTexto + "\n");
             fileWriter.write("Restaurante: " + restaurante.getNombre() + "\n");
-            fileWriter.write("Dirección del Restaurante: " + devolverDireccionRestaurante(restaurante.getDireccion()) + "\n");
+            fileWriter.write("Dirección del Restaurante: " + Restaurante_m.devolverDireccionRestaurante(restaurante.getDireccion()) + "\n");
             fileWriter.write("Comidas Compradas:\n");
             for (int i = 0; i < comidas.size(); i++) {
                 Comida_m comida = comidas.get(i);
@@ -193,40 +197,37 @@ public class Cesta_m {
             fileWriter.write("\nDatos del Cliente:\n");
             fileWriter.write("Nombre: " + us.getNombre() + "\n");
             fileWriter.write("Correo Electrónico: " + us.getEmail() + "\n");
-            fileWriter.write("Dirección de Envío: " + devolverDireccionUsuario(us.getDireccion()) + "\n");
+            fileWriter.write("Dirección de Envío: " + Usuario.devolverDireccionUsuario(us.getDireccion()) + "\n");
 
-            System.out.println("Datos exportados exitosamente al archivo " + nombreArchivo);
+            System.out.println("Datos de venta exportados correctamente al archivo " + nombreArchivo);
+
         } catch (IOException e) {
-            System.out.println("Error al exportar los datos al archivo " + nombreArchivo + ": " + e.getMessage());
+            System.out.println("Error al exportar datos de venta al archivo " + nombreArchivo + ": " + e.getMessage());
         }
     }
     
-     public static void calcularPrecioFinal() {
-        
-        if (Cesta_m.getRestauranteFromItem().isCateringParaEmpresas()) {
-            if (Establecimiento.jCheckBox1.isSelected() || Establecimiento.jCheckBox2.isSelected() || 
-                    Establecimiento.jCheckBox3.isSelected() || Establecimiento.jCheckBox4.isSelected()) {
+        /**
+     * Calcula el precio final de la compra en función del restaurante seleccionado y los elementos del carrito.
+     * Si el restaurante es un catering para empresas y se selecciona al menos una opción adicional del catering,
+     * los gastos de envío se establecen en 0 y se muestra un precio final de 0.0.
+     * En caso contrario, se calcula el precio final sumando el total de los elementos del carrito,
+     * el precio del catering (si corresponde) y los gastos de envío, y se muestra en el campo correspondiente.
+     */
+    public static void calcularPrecioFinal() {
+        if (Restaurante_m.getRestauranteFromItem().isCateringParaEmpresas()) {
+            if (Restaurante_v.jCheckBox1.isSelected() || Restaurante_v.jCheckBox2.isSelected() || 
+                    Restaurante_v.jCheckBox3.isSelected() || Restaurante_v.jCheckBox4.isSelected()) {
                 gastosE = 0;
                 precio.setText("0.0");
             }
             Double precioF = total + Restaurante_m.precioCatering() + gastosE;
             String precioFinalStr = String.valueOf(precioF);
             Cesta_v.precioFinal.setText(precioFinalStr);
-        }
-        else {
+        } else {
             Double precioF = total * 0.9 + gastosE; 
             String precioFinalStr = String.valueOf(precioF);
             Cesta_v.precioFinal.setText(precioFinalStr);
         }
     }
-    
-    public static Usuario buscarUsuario(String email, String contraseña, List<Usuario> usuarios) {
-    for (Usuario usuario : usuarios) {
-        if (usuario.getEmail().equals(email) && usuario.getContraseña().equals(contraseña)) {
-            return usuario;
-        }
-    }
-    return null; // Si no se encuentra un usuario con el mismo nombre y email
-    }
-    
+
 }

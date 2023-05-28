@@ -1,4 +1,4 @@
-Fecha de Venta: 20:48:01
+Fecha de Venta: 18:04:33
 Restaurante: Restaurante 1
 Dirección del Restaurante: Localidad: Barcelona, Codigo Postal: 19198, Calle: Avenida del Sol, Numero: 123
 Comidas Compradas:

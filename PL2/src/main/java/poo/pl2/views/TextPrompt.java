@@ -16,14 +16,31 @@ import javax.swing.text.*;
  *  of the parent text component. You are free to change the properties after
  *  class construction.
  */
+
 public class TextPrompt extends JLabel
 	implements FocusListener, DocumentListener
 {
-	public enum Show
+
+    /**
+     *
+     */
+    public enum Show
 	{
-		ALWAYS,
-		FOCUS_GAINED,
-		FOCUS_LOST;
+
+        /**
+         *
+         */
+        ALWAYS,
+
+            /**
+             *
+             */
+            FOCUS_GAINED,
+
+        /**
+         *
+         */
+        FOCUS_LOST;
 	}
 
 	private JTextComponent component;
@@ -33,12 +50,23 @@ public class TextPrompt extends JLabel
 	private boolean showPromptOnce;
 	private int focusLost;
 
-	public TextPrompt(String text, JTextComponent component)
+    /**
+     *
+     * @param text
+     * @param component
+     */
+    public TextPrompt(String text, JTextComponent component)
 	{
 		this(text, component, Show.ALWAYS);
 	}
 
-	public TextPrompt(String text, JTextComponent component, Show show)
+    /**
+     *
+     * @param text
+     * @param component
+     * @param show
+     */
+    public TextPrompt(String text, JTextComponent component, Show show)
 	{
 		this.component = component;
 		setShow( show );
@@ -194,12 +222,21 @@ public class TextPrompt extends JLabel
 
 //  Implement FocusListener
 
+    /**
+     *
+     * @param e
+     */
+
 	public void focusGained(FocusEvent e)
 	{
 		checkForPrompt();
 	}
 
-	public void focusLost(FocusEvent e)
+    /**
+     *
+     * @param e
+     */
+    public void focusLost(FocusEvent e)
 	{
 		focusLost++;
 		checkForPrompt();
@@ -207,15 +244,28 @@ public class TextPrompt extends JLabel
 
 //  Implement DocumentListener
 
+    /**
+     *
+     * @param e
+     */
+
 	public void insertUpdate(DocumentEvent e)
 	{
 		checkForPrompt();
 	}
 
-	public void removeUpdate(DocumentEvent e)
+    /**
+     *
+     * @param e
+     */
+    public void removeUpdate(DocumentEvent e)
 	{
 		checkForPrompt();
 	}
 
-	public void changedUpdate(DocumentEvent e) {}
+    /**
+     *
+     * @param e
+     */
+    public void changedUpdate(DocumentEvent e) {}
 }

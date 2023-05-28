@@ -8,17 +8,37 @@ import poo.pl2.models.Comida_m;
 import poo.pl2.models.Restaurante_m;
 import poo.pl2.models.Usuario;
 
+/**
+ *
+ * @author pablo
+ */
 public class Cesta_v extends javax.swing.JDialog implements Serializable{
 
+    /**
+     *
+     */
     public static double total;
+
+    /**
+     *
+     */
     public static double gastosE;
+
+    /**
+     *
+     */
     public static List<String> ventaData = new ArrayList<>();
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public Cesta_v(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         Cesta_m.calcularCarrito(Comida_m.carritos);
-        Cesta_m.calcularGastosEnvio(Cesta_m.getRestauranteFromItem());
+        Cesta_m.calcularGastosEnvio(Restaurante_m.getRestauranteFromItem());
         Cesta_m.calcularPrecioFinal();
         Cesta_m.populateCart(carro);
         Restaurante_m.precioCatering();
@@ -131,20 +151,20 @@ public class Cesta_v extends javax.swing.JDialog implements Serializable{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        char[] passwordChars = Login.contraseña.getPassword();
+        char[] passwordChars = Login_v.contraseña.getPassword();
         String contraseña = String.valueOf(passwordChars);
 
-        Cesta_m.exportarDatos("venta.txt", Cesta_m.getRestauranteFromItem(),
+        Cesta_m.exportarDatos("venta.txt", Restaurante_m.getRestauranteFromItem(),
             Comida_m.carritos,
 
-            Plato.cantidades , Cesta_m.buscarUsuario(Login.usuario.getText(),
+            Comida_v.cantidades , Usuario.buscarUsuario(Login_v.usuario.getText(),
                 contraseña, Usuario.listaUsuarios));
 
         //Almacenar datos
-        Cesta_m.exportarVenta(Cesta_m.getRestauranteFromItem(), Comida_m.carritos, Plato.cantidades, Cesta_m.buscarUsuario(Login.usuario.getText(),
+        Cesta_m.exportarVenta(Restaurante_m.getRestauranteFromItem(), Comida_m.carritos, Comida_v.cantidades, Usuario.buscarUsuario(Login_v.usuario.getText(),
             contraseña, Usuario.listaUsuarios));
 
-    Cesta_m.serializarVentaData(ventaData, "CopiaSegVentas.dat");
+    Cesta_m.serializarVentaData(ventaData, "persistencia/CopiaSegVentas.dat");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
