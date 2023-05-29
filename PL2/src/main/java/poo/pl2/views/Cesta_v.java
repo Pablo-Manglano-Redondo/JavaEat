@@ -3,6 +3,7 @@ package poo.pl2.views;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import poo.pl2.models.Cesta_m;
 import poo.pl2.models.Comida_m;
 import poo.pl2.models.Restaurante_m;
@@ -191,6 +192,7 @@ public class Cesta_v extends javax.swing.JDialog implements Serializable{
             contraseña, Usuario.listaUsuarios));
 
     Cesta_m.serializarVentaData(ventaData, "persistencia/CopiaSegVentas.dat");
+    JOptionPane.showMessageDialog(this, "Compra realizada correctamente, revise su ticket.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

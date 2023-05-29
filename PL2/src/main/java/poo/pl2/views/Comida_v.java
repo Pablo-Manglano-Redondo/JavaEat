@@ -3,6 +3,7 @@ package poo.pl2.views;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import poo.pl2.models.Comida_m;
 
 /**
@@ -209,6 +210,7 @@ public class Comida_v extends javax.swing.JDialog {
         Comida_m value = Comida_m.getComidaFromItem();
         Comida_m.carritos.add(value);
         cantidades.add(Comida_v.cantidad.getSelectedIndex() + 1);
+        JOptionPane.showMessageDialog(rootPane, "Comida añadida al carrito con éxito.");
     }//GEN-LAST:event_pedidoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

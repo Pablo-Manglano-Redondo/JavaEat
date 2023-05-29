@@ -41,15 +41,10 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel1" min="-2" pref="97" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="cantidad" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jLabel1" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                                          <Component id="cantidad" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="price" max="32767" attributes="0"/>
                                           <Component id="pedido" min="-2" pref="118" max="-2" attributes="0"/>
@@ -78,7 +73,6 @@
                       <Component id="imagenComida" min="-2" pref="350" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="68" max="-2" attributes="0"/>
                       <Component id="descripcionRestaurante" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
