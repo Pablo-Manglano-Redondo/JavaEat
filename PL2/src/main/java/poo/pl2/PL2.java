@@ -27,7 +27,7 @@ public class PL2 {
         
         TarjetaCredito tarjetaUsuario = new TarjetaCredito("4817432343", "yo", "04/06/4324");
             
-        Direccion direccionUsuario = new Direccion("Avenida de la Luna", "12345",
+        Direccion direccionUsuario = new Direccion("Avenida_de_la_Luna", "12345",
                 "Madrid", "19198");  
         
         Usuario usuario1 = new Usuario("pablo", "pablomanglano4235@gmail.com", "pablo", direccionUsuario, tarjetaUsuario, "608 05 96 62", "03492382Q", "");
