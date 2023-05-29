@@ -361,7 +361,7 @@ public class SignIn_v extends javax.swing.JDialog {
         
         int key = evt.getKeyChar();
         
-        boolean numero = key >= 48 && key <= 57;
+        boolean numero = key >= 48 && key <= 57 && key >= 65 && key <= 90 || key >= 97 && key <= 122 && key == 32;
         
         if (!numero) {
             
@@ -376,7 +376,7 @@ public class SignIn_v extends javax.swing.JDialog {
         
         int key = evt.getKeyChar();
         
-        boolean numero = key >= 48 && key <= 57;
+        boolean numero = key >= 48 && key <= 57 && key == 32;
         
         if (!numero) {
             
@@ -391,7 +391,7 @@ public class SignIn_v extends javax.swing.JDialog {
         
         int key = evt.getKeyChar();
         
-        boolean numero = key >= 65 && key <= 90 || key >= 97 && key <= 122 ;
+        boolean numero = key >= 65 && key <= 90 || key >= 97 && key <= 122 && key == 32;
         
         if (!numero) {
             
